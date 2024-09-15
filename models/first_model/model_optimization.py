@@ -55,6 +55,8 @@ def main():
             hierarchical=hierarchical,
             model_name=f"INIT_Model",
         ).create_problem(force_compile=True)
+    
+    problem.objective.amici_model.setAllStatesNonNegative()
 
     # some model properties
     print("Model parameters:", list(problem.objective.amici_model.getParameterIds()), "\n")
