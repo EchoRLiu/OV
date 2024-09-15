@@ -24,29 +24,22 @@
               <plus/>
               <ci> kappa </ci>
               <apply>
-                <exp/>
+                <times/>
                 <apply>
-                  <plus/>
+                  <exp/>
                   <apply>
                     <minus/>
                     <ci> rho </ci>
                   </apply>
+                </apply>
+                <apply>
+                  <minus/>
                   <apply>
-                    <ln/>
-                    <apply>
-                      <minus/>
-                      <apply>
-                        <divide/>
-                        <cn type="integer"> 1 </cn>
-                        <apply>
-                          <times/>
-                          <cn type="integer"> 4 </cn>
-                          <cn type="integer"> 100000 </cn>
-                        </apply>
-                      </apply>
-                      <ci> kappa </ci>
-                    </apply>
+                    <divide/>
+                    <cn type="integer"> 1 </cn>
+                    <cn type="integer"> 400 </cn>
                   </apply>
+                  <ci> kappa </ci>
                 </apply>
               </apply>
             </apply>
