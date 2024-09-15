@@ -27,6 +27,8 @@ model vvDD_effect
   alpha = 0.01;
   delta = 0.01;
 
+  // it seems like lambda is reserved and hence cannot be used as a parameter name
+
 end
 """
 
