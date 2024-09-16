@@ -164,4 +164,5 @@ cython_debug/
 
 # folder for storing the results
 models/first_model/optimization_history/*
+models/second_model/optimization_history/*
 figures/*
