@@ -166,3 +166,4 @@ cython_debug/
 models/first_model/optimization_history/*
 models/second_model/optimization_history/*
 figures/*
+models/second_model_dynamics_test/optimization_history/*
