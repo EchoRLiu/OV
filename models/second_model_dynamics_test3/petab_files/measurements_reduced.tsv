@@ -1,0 +1,6 @@
+observableId	simulationConditionId	measurement	time	observableParameters	noiseParameters
+tumor_vol	vvDD	2994412.1860097945	0	scaling_1	sd_vol
+tumor_vol	vvDD	3704285.561967492	1	scaling_1	sd_vol
+tumor_vol	vvDD	1022541.6972384228	2	scaling_1	sd_vol
+tumor_vol	vvDD	887327.7208655328	3	scaling_1	sd_vol
+tumor_vol	vvDD	673238.9249417782	4	scaling_1	sd_vol
