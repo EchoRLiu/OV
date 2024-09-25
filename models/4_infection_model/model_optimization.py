@@ -44,7 +44,7 @@ def main():
     # optimization
     hierarchical = True
 
-    petab_yaml = 'petab_files/init_model.yaml'
+    petab_yaml = 'petab_files/delayed_infection.yaml'
     petab.validate(petab_yaml)
     petab_problem = petab.Problem.from_yaml(petab_yaml)
 
@@ -53,15 +53,10 @@ def main():
     problem = pypesto.petab.PetabImporter(
             petab_problem,
             hierarchical=hierarchical,
-            model_name=f"INIT_Model",
+            model_name=f"DELAYED_INFECTION_Model",
         ).create_problem(force_compile=True)
     
     problem.objective.amici_model.setAllStatesNonNegative()
-    problem.objective.amici_solver.setMaxSteps(200000)
-    problem.objective.amici_solver.setRelativeTolerance(1e-12)
-    problem.objective.amici_solver.setAbsoluteTolerance(1e-15)
-    problem.objective.amici_solver.setRelativeToleranceSteadyState(1e-8)
-    problem.objective.amici_solver.setAbsoluteToleranceSteadyState(1e-10)
 
     # some model properties
     print("Model parameters:", list(problem.objective.amici_model.getParameterIds()), "\n")
@@ -70,7 +65,7 @@ def main():
     print("Model states:    ", list(problem.objective.amici_model.getStateIds()), "\n")
 
     if load:
-        result = pypesto.store.read_result('optimization_history/n'+ str(n_runs) +'_v2.hdf5')
+        result = pypesto.store.read_result('optimization_history/n'+ str(n_runs) +'_v3.hdf5')
     else:
         result = minimize(
             problem=problem,
@@ -78,8 +73,8 @@ def main():
             n_starts=n_runs,
             engine=MultiProcessEngine(n_procs=n_procs),
             # startpoint_method=uniform,
-            history_options = pypesto.HistoryOptions(trace_record=True, storage_file='optimization_history/n'+ str(n_runs) +'_v2.hdf5'),
-            filename='optimization_history/n'+ str(n_runs) +'_v2.hdf5',
+            history_options = pypesto.HistoryOptions(trace_record=True, storage_file='optimization_history/n'+ str(n_runs) +'_v3.hdf5'),
+            filename='optimization_history/n'+ str(n_runs) +'_v3.hdf5',
         )
 
     # print result summary

@@ -171,3 +171,4 @@ models/second_model_dynamics_test2/optimization_history/*
 models/second_model_dynamics_test3/optimization_history/*
 models/third_model/optimization_history/*
 models/third_model_1000/optimization_history/*
+models/4_infection_model/optimization_history/*
