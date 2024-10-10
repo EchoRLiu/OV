@@ -8,7 +8,7 @@ model vvDD_effect_with_delay
   C_u' = rho * C_u * (1 - kappa * (C_u + C_i + C_l)) - psi * V * C_u;
   C_i' = psi * V * C_u - phi * C_i;
   C_l' = phi * C_i - alpha * C_l;
-  V' = beta * alpha * C_i - psi * V * C_u - delta * V;
+  V' = beta * alpha * C_l - psi * V * C_u - delta * V;
 
   // initial conditions
   // t=0 is when the virus is injected
