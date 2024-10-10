@@ -57,11 +57,6 @@ def main():
         ).create_problem(force_compile=True)
     
     problem.objective.amici_model.setAllStatesNonNegative()
-    problem.objective.amici_solver.setMaxSteps(200000)
-    problem.objective.amici_solver.setRelativeTolerance(1e-12)
-    problem.objective.amici_solver.setAbsoluteTolerance(1e-15)
-    problem.objective.amici_solver.setRelativeToleranceSteadyState(1e-8)
-    problem.objective.amici_solver.setAbsoluteToleranceSteadyState(1e-10)
 
     # some model properties
     print("Model parameters:", list(problem.objective.amici_model.getParameterIds()), "\n")
