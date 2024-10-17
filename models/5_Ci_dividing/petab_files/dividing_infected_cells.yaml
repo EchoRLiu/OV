@@ -1,13 +1,13 @@
 format_version: 1
-parameter_file: parameters.tsv
+parameter_file: parameters_v2.tsv
 problems:
   - condition_files:
     - conditions.tsv
     measurement_files:
     - measurements.tsv
     observable_files:
-    - observables.tsv
+    - observables_v2.tsv
     sbml_files:
-    - dividing_infected_cells.xml
+    - dividing_infected_cells_v2.xml
     visualization_files:
     - visualization.tsv

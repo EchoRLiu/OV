@@ -3,26 +3,50 @@ import libsbml
 
 """
 the fifth model includes the delayed lysis model, where the infected cells can still divie into more infected cells
-with only one infected state
+with five hidden state
 without the following:
   # // temporal infection rate
   # psi := psi_0 * exp(- tau * time);
 """
 
-dividing_infected_cells_model = """
+# Generate ODE functions and initial conditions
+ode_functions = []
+initial_conditions = []
+n_hidden = 5
+
+# ODE for C_u
+ode_functions.append("C_u' = rho * C_u * (1 - kappa * (C_u + C_i + " + " + ".join([f"C_i{j}" for j in range(1, n_hidden + 1)]) + " + C_l)) - psi * V * C_u;")
+initial_conditions.append("C_u = 1 / (kappa + exp(-rho) * (1/400 - kappa));")
+
+# ODE for C_i
+ode_functions.append("C_i' = rho * C_i * (1 - kappa * (C_u + C_i + " + " + ".join([f"C_i{j}" for j in range(1, n_hidden + 1)]) + " + C_l)) + psi * V * C_u - phi * C_i;")
+initial_conditions.append("C_i = 0;")
+
+# ODE and initial conditions for C_i1 to C_i{n_hidden}
+for j in range(1, n_hidden + 1):
+  if j == 1:
+    ode_functions.append(f"C_i{j}' = rho * C_i{j} * (1 - kappa * (C_u + C_i + " + " + ".join([f"C_i{k}" for k in range(1, n_hidden + 1)]) + f" + C_l)) + phi * C_i - phi * C_i{j};")
+  else:
+    ode_functions.append(f"C_i{j}' = rho * C_i{j} * (1 - kappa * (C_u + C_i + " + " + ".join([f"C_i{k}" for k in range(1, n_hidden + 1)]) + f" + C_l)) + phi * C_i{j-1} - phi * C_i{j};")
+  initial_conditions.append(f"C_i{j} = 0;")
+
+# ODE for C_l
+ode_functions.append(f"C_l' = rho * C_l * (1 - kappa * (C_u + C_i + " + " + ".join([f"C_i{j}" for j in range(1, n_hidden + 1)]) + f" + C_l)) + phi * C_i{n_hidden} - alpha * C_l;")
+initial_conditions.append("C_l = 0;")
+
+# ODE for V
+ode_functions.append("V' = beta * alpha * C_l - psi * V * C_u - delta * V;")
+initial_conditions.append("V = virus_injection;")
+
+dividing_infected_cells_model = f"""
 model dividing_infected_cells
 
   // ODE functions
-  C_u' = rho * C_u * (1 - kappa * (C_u + C_i)) - psi * V * C_u;
-  C_i' = rho * C_i * (1 - kappa * (C_u + C_i)) + psi * V * C_u - alpha * C_i;
-  V' = beta * alpha * C_i - psi * V * C_u - delta * V;
+  {' '.join(ode_functions)}
 
   // initial conditions
   // t=0 is when the virus is injected
-  C_u = 1 / (kappa + exp(-rho) * (1/400 - kappa)); // number of uninfected tumor cells at t=0
-  // 400 cells/nL is the number of tumor injected at t=-1
-  C_i = 0; // number of infected tumor cells at t=0
-  V = virus_injection; // number of virus injected at t=0
+  {' '.join(initial_conditions)}
 
   // condition dependent parameters
   virus_injection = 3 * 1E9; // pfu
@@ -31,6 +55,7 @@ model dividing_infected_cells
   rho = 0.01;
   kappa = 0.01;
   psi = 0.01;
+  phi = 0.01;
   alpha = 0.01;
   beta = 0.01;
   delta = 0.01;
@@ -49,7 +74,7 @@ ant_str_before = r.getAntimony()
 sbml_str_before = r.getSBML()
 
 # write xml file
-# with open('petab_files/dividing_infected_cells.xml', 'w') as f:
+# with open('petab_files/dividing_infected_cells_v2.xml', 'w') as f:
 #     f.write(sbml_str_before)
 
-r.exportToSBML('petab_files/dividing_infected_cells.xml', current=False)
+r.exportToSBML('petab_files/dividing_infected_cells_v2.xml', current=False)
