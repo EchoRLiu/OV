@@ -174,3 +174,4 @@ models/third_model_1000/optimization_history/*
 models/4_infection_model/optimization_history/*
 models/5_Ci_dividing/optimization_history/*
 models/6_Ci_dividing_batch_effect/optimization_history/*
+.Rproj.user
