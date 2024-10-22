@@ -16,7 +16,7 @@ n_hidden = 5
 
 # ODE for C_u
 ode_functions.append("C_u' = rho * C_u * (1 - kappa * (C_u + C_i + " + " + ".join([f"C_i{j}" for j in range(1, n_hidden + 1)]) + " + C_l)) - psi * V * C_u;")
-initial_conditions.append("C_u = 1 / (kappa + exp(-rho) * (1/400 - kappa));")
+initial_conditions.append("C_u = 1 / (kappa + exp(-rho) * (1/(400*initial_vol) - kappa));")
 
 # ODE for C_i
 ode_functions.append("C_i' = rho * C_i * (1 - kappa * (C_u + C_i + " + " + ".join([f"C_i{j}" for j in range(1, n_hidden + 1)]) + " + C_l)) + psi * V * C_u - phi * C_i;")
@@ -38,8 +38,8 @@ initial_conditions.append("C_l = 0;")
 ode_functions.append("V' = beta * alpha * C_l - psi * V * C_u - delta * V;")
 initial_conditions.append("V = virus_injection;")
 
-dividing_infected_cells_model = f"""
-model dividing_infected_cells
+individual_start_model = f"""
+model individual_start
 
   // ODE functions
   {' '.join(ode_functions)}
@@ -50,6 +50,7 @@ model dividing_infected_cells
 
   // condition dependent parameters
   virus_injection = 3 * 1E9; // pfu
+  initial_vol = 1; // the parameter to shift the initial volume of the tumor
   
   // parameters to be estimated
   rho = 0.01;
@@ -67,14 +68,14 @@ end
 """
 
 # Load the model
-r = te.loada(dividing_infected_cells_model)
+r = te.loada(individual_start_model)
 
 # convert model back to Antimony / SBML
 ant_str_before = r.getAntimony()
 sbml_str_before = r.getSBML()
 
 # write xml file
-# with open('petab_files/dividing_infected_cells_v2.xml', 'w') as f:
+# with open('petab_files/individual_start.xml', 'w') as f:
 #     f.write(sbml_str_before)
 
-r.exportToSBML('petab_files/dividing_infected_cells_v2.xml', current=False)
+r.exportToSBML('petab_files/individual_start.xml', current=False)

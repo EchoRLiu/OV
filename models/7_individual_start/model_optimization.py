@@ -44,7 +44,7 @@ def main():
     # optimization
     hierarchical = True
 
-    petab_yaml = 'petab_files/dividing_infected_cells.yaml'
+    petab_yaml = 'petab_files/individual_start.yaml'
     petab.validate(petab_yaml)
     petab_problem = petab.Problem.from_yaml(petab_yaml)
 
@@ -53,7 +53,7 @@ def main():
     problem = pypesto.petab.PetabImporter(
             petab_problem,
             hierarchical=hierarchical,
-            model_name=f"DIVIDING_INFECTED_CELLS_Model",
+            model_name=f"INDIVIDUAL_START_Model",
         ).create_problem(force_compile=True)
     
     problem.objective.amici_model.setAllStatesNonNegative()
@@ -65,7 +65,7 @@ def main():
     print("Model states:    ", list(problem.objective.amici_model.getStateIds()), "\n")
 
     if load:
-        result = pypesto.store.read_result('optimization_history/n'+ str(n_runs) +'_v2.hdf5')
+        result = pypesto.store.read_result('optimization_history/n'+ str(n_runs) +'.hdf5')
     else:
         result = minimize(
             problem=problem,
@@ -73,8 +73,8 @@ def main():
             n_starts=n_runs,
             engine=MultiProcessEngine(n_procs=n_procs),
             # startpoint_method=uniform,
-            history_options = pypesto.HistoryOptions(trace_record=True, storage_file='optimization_history/n'+ str(n_runs) +'_v2.hdf5'),
-            filename='optimization_history/n'+ str(n_runs) +'_v2.hdf5',
+            history_options = pypesto.HistoryOptions(trace_record=True, storage_file='optimization_history/n'+ str(n_runs) +'.hdf5'),
+            filename='optimization_history/n'+ str(n_runs) +'.hdf5',
         )
 
     # print result summary
