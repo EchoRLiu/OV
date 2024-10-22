@@ -19,7 +19,7 @@ model <- function() {
     eta_Cu0 ~ 0.1         # Variance of random effect on log_Cu0
     
     # Error model
-    prop.err <- 0.1
+    add.err <- 0.1
     
   })
   model({
@@ -45,7 +45,9 @@ model <- function() {
     Ci4(0) <- 0
     Ci5(0) <- 0
     Cl(0)  <- 0
-    V(0)   <- 3 * 10^9
+    
+    # Use the preprocessed V0_INIT column from the dataset
+    V(0) <- V0_INIT
     
     # ODE system
     d/dt(C_u)  = rho * C_u * (1 - kappa * (C_u + Ci0 + Ci1 + Ci2 + Ci3 + Ci4 + Ci5 + Cl)) - psi * V * C_u
@@ -60,23 +62,11 @@ model <- function() {
     
     # Observation model: Observable is TotalCells
     TotalObs <- C_u + Ci0 + Ci1 + Ci2 + Ci3 + Ci4 + Ci5 + Cl
-    TotalObs ~ prop(prop.err)
+    logTotalObs <- log(TotalObs)
+    
+    logTotalObs ~ add(add.err)
   })
 }
-
-# first, we need to import all the data in ov_datasets.csv
-# which has gathered all tumor volume data in McCart 2021 et al. with webplotdigitizer
-
-# data structure:
-# 1. the first 20 columns are the tumor volume under vvDD condition
-#    specifying x (time) and y (tumor volume) for each two columns, totalling 10 samples
-#    the first row can be ignored
-#    the 1-5 rows are the 5 time points for all 10 samples
-# 2. the next 20 columns are the tumor volume under normal/PBS condition with similar structure
-# 3. the last four columns are the mean and stde data of the tumor volume under vvDD condition and normal/PBS condition
-#    each two columns specify one condition, respectively the x and y
-#    each three rows specify one time point: mean, stde+, and stde-
-#    again, the first row can be ignored
 
 # Load the data from the CSV file
 df <- read.csv("/Users/yuhongliu/Documents/OV/data/ov_datasets_v7.csv")
@@ -126,6 +116,12 @@ data_final <- rbind(vvdd_melted, pbs_melted)
 # Display the first few rows
 head(data_final)
 
+# Assign initial values of V(0) based on GROUP
+data_final$V0_INIT <- ifelse(data_final$GROUP == "vvDD", 3 * 10^9, 0)
+
+# Log-transform the observed tumor volume data (DV)
+data_final$DV <- log(data_final$DV + 1)  # Add a small constant to handle zeros if applicable
+
 # Convert data to data frame
 data_final <- as.data.frame(data_final)
 
@@ -140,5 +136,29 @@ fit <- nlmixr2(model, data=data_final, est="saem", list(print=0), table=list(cwr
 # Summarize the fit
 print(summary(fit))
 
-# Plot the fit
-plot(fit)
+# Extract fitted values
+fit_data <- as.data.frame(fit)
+
+# Plot DV against PRED for each five rows in one plot
+plot_list <- list()
+for (i in seq(1, nrow(fit_data), by = 5)) {
+  plot_data <- fit_data[i:(i+4), ]
+  p <- ggplot(plot_data, aes(x = TIME)) +
+    geom_point(aes(y = DV), color = "blue") +
+    geom_line(aes(y = PRED), color = "red") +
+    geom_point(aes(y = PRED), color = "red") +
+    labs(title = paste("Rows", i, "to", i+4), x = "Time", y = "Value") +
+    theme_minimal()
+  plot_list[[length(plot_list) + 1]] <- p
+}
+
+# Display the plots one by one
+for (i in seq_along(plot_list)) {
+  print(plot_list[[i]])
+  Sys.sleep(1)  # Pause for 1 second between plots
+}
+
+# Save each plot to a separate file
+# for (i in seq_along(plot_list)) {
+#  ggsave(filename = paste0("plot_", i, ".png"), plot = plot_list[[i]], width = 8, height = 6)
+#}
