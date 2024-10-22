@@ -1,7 +1,8 @@
 library(nlmixr2)
-# library(RxODE)
+library(rxode2)
 library(data.table)
 library(ggplot2)
+library(reshape2)
 
 model <- function() {
   ini({
@@ -13,16 +14,16 @@ model <- function() {
     ttheta5 <- log(0.1)   # alpha
     ttheta6 <- log(0.1)   # beta
     ttheta7 <- log(0.1)   # delta_v
-
+    
     # Random effects
     eta_Cu0 ~ 0.1         # Variance of random effect on log_Cu0
-
+    
     # Error model
     prop.err <- 0.1
-
+    
   })
   model({
-
+    
     # Transform parameters
     rho <- exp(ttheta1)
     kappa <- exp(ttheta2)
@@ -31,10 +32,10 @@ model <- function() {
     alpha <- exp(ttheta5)
     beta <- exp(ttheta6)
     delta_v <- exp(ttheta7)
-
+    
     # Individual initial condition for C_u(0) with random effect
-    Cu0 <- exp(log(400) + eta_Cu0)
-
+    Cu0 <- exp(log(400)+ eta_Cu0)
+    
     # Initial conditions
     C_u(0) <- 1 / (kappa + exp(-rho) * (1/Cu0 - kappa))
     Ci0(0) <- 0
@@ -45,7 +46,7 @@ model <- function() {
     Ci5(0) <- 0
     Cl(0)  <- 0
     V(0)   <- 3 * 10^9
-
+    
     # ODE system
     d/dt(C_u)  = rho * C_u * (1 - kappa * (C_u + Ci0 + Ci1 + Ci2 + Ci3 + Ci4 + Ci5 + Cl)) - psi * V * C_u
     d/dt(Ci0)  = rho * Ci0 * (1 - kappa * (C_u + Ci0 + Ci1 + Ci2 + Ci3 + Ci4 + Ci5 + Cl)) + psi * V * C_u - phi * Ci0
@@ -56,24 +57,71 @@ model <- function() {
     d/dt(Ci5)  = rho * Ci5 * (1 - kappa * (C_u + Ci0 + Ci1 + Ci2 + Ci3 + Ci4 + Ci5 + Cl)) + phi * Ci4 - phi * Ci5
     d/dt(Cl)   = rho * Cl  * (1 - kappa * (C_u + Ci0 + Ci1 + Ci2 + Ci3 + Ci4 + Ci5 + Cl)) + phi * Ci5 - alpha * Cl
     d/dt(V)    = beta * alpha * Cl - psi * V * C_u - delta_v * V
-
+    
     # Observation model: Observable is TotalCells
     TotalObs <- C_u + Ci0 + Ci1 + Ci2 + Ci3 + Ci4 + Ci5 + Cl
     TotalObs ~ prop(prop.err)
   })
 }
 
-# Load the data
-data <- read.table("measurements.tsv", header=TRUE, sep="\t")
+# first, we need to import all the data in ov_datasets.csv
+# which has gathered all tumor volume data in McCart 2021 et al. with webplotdigitizer
 
-# Extract the relevant columns and create the data frame
-ID <- seq_len(nrow(data))  # Create an id column as a unique identifier for each row
-TIME <- data$time   # Use the 'time' column for TIME
-DV <- data$measurement  # Use 'measurement' column for DV
-Group <- data$simulationConditionId  # Use 'simulationConditionId' for Group
+# data structure:
+# 1. the first 20 columns are the tumor volume under vvDD condition
+#    specifying x (time) and y (tumor volume) for each two columns, totalling 10 samples
+#    the first row can be ignored
+#    the 1-5 rows are the 5 time points for all 10 samples
+# 2. the next 20 columns are the tumor volume under normal/PBS condition with similar structure
+# 3. the last four columns are the mean and stde data of the tumor volume under vvDD condition and normal/PBS condition
+#    each two columns specify one condition, respectively the x and y
+#    each three rows specify one time point: mean, stde+, and stde-
+#    again, the first row can be ignored
 
-# Create the final data frame
-data_final <- data.frame(ID=ID, TIME=TIME, DV=DV, Group=Group)
+# Load the data from the CSV file
+df <- read.csv("/Users/yuhongliu/Documents/OV/data/ov_datasets_v7.csv")
+
+# Increase the number of digits after the dot for data.frames
+options(digits=10)
+# Extract tumor volume data for vvDD condition
+tumor_vol_vvdd <- df[2:6, seq(2, 20, by = 2)]  # Select every other column starting from the second column (Y values)
+# Create a DataFrame with known time points and extracted tumor volumes
+tumor_vol_vvdd_df <- data.frame(lapply(tumor_vol_vvdd, as.numeric))
+colnames(tumor_vol_vvdd_df) <- paste0("vvdd_sample_", 1:10)
+rownames(tumor_vol_vvdd_df) <- 0:4
+
+# Extract tumor volume data for normal/PBS condition
+tumor_vol_pbs <- df[2:6, seq(22, 40, by = 2)]  # Select every other column starting from the 22nd column (Y values)
+# Create a DataFrame with known time points and extracted tumor volumes
+tumor_vol_pbs_df <- data.frame(lapply(tumor_vol_pbs, as.numeric))
+colnames(tumor_vol_pbs_df) <- paste0("pbs_sample_", 1:10)
+rownames(tumor_vol_pbs_df) <- 0:4
+
+# Convert data to numeric type
+tumor_vol_vvdd_df[] <- lapply(tumor_vol_vvdd_df, as.numeric)
+tumor_vol_pbs_df[] <- lapply(tumor_vol_pbs_df, as.numeric)
+
+# Define time points
+time_points <- 0:4
+
+# Add time points to both dataframes
+tumor_vol_vvdd_df$TIME <- time_points
+tumor_vol_pbs_df$TIME <- time_points
+
+# Reshape vvDD dataframe
+vvdd_melted <- melt(tumor_vol_vvdd_df, id.vars = "TIME", 
+                    variable.name = "ID", value.name = "DV")
+vvdd_melted$ID <- as.numeric(gsub("vvdd_sample_", "", vvdd_melted$ID))  # Extract sample number from ID
+vvdd_melted$GROUP <- "vvDD"  # Add GROUP column for vvDD
+
+# Reshape PBS dataframe
+pbs_melted <- melt(tumor_vol_pbs_df, id.vars = "TIME", 
+                   variable.name = "ID", value.name = "DV")
+pbs_melted$ID <- as.numeric(gsub("pbs_sample_", "", pbs_melted$ID)) + 10  # Sample number + 10
+pbs_melted$GROUP <- "ctrl"  # Add GROUP column for PBS
+
+# Combine both dataframes
+data_final <- rbind(vvdd_melted, pbs_melted)
 
 # Display the first few rows
 head(data_final)
@@ -82,7 +130,7 @@ head(data_final)
 data_final <- as.data.frame(data_final)
 
 # Convert Group to factor (if not already)
-data_final$Group <- as.factor(data_final$Group)
+data_final$GROUP <- as.factor(data_final$GROUP)
 
 head(data_final)
 
