@@ -173,8 +173,11 @@
             <apply>
               <times/>
               <ci> alpha </ci>
-              <ci> L_p </ci>
-              <ci> L_p </ci>
+              <apply>
+                <power/>
+                <ci> L_p </ci>
+                <cn type="integer"> 100 </cn>
+              </apply>
             </apply>
           </apply>
         </math>
