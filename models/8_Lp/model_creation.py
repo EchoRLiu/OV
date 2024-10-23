@@ -7,9 +7,9 @@ model Lp_model
 
   // ODE functions
   C_u' = rho * C_u * (1 - (C_u + C_i) / kappa) - psi * V * C_u;
-  C_i' = rho * C_i * (1 - (C_u + C_i) / kappa) + psi * V * C_u - L_p * alpha * C_i;
+  C_i' = rho * C_i * (1 - (C_u + C_i) / kappa) + psi * V * C_u - (L_p / (nu + L_p)) * alpha * C_i;
   L_p' = phi * C_i - alpha * L_p * L_p;
-  V' = beta * alpha * C_i - psi * V * C_u - delta * V;
+  V' = beta * (L_p / (nu + L_p)) * alpha * C_i - psi * V * C_u - delta * V;
 
   // initial conditions
   // t=0 is when the virus is injected
@@ -30,6 +30,7 @@ model Lp_model
   beta = 0.01;
   alpha = 0.01;
   delta = 0.01;
+  nu = 0.01;
   // the scaling parameter should handle the scaling from cell number to volume of tumor
 
   // it seems like lambda is reserved and hence cannot be used as a parameter name
