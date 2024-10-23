@@ -9,7 +9,6 @@
       <parameter id="psi" value="0.01" constant="true"/>
       <parameter id="V" constant="false"/>
       <parameter id="L_p" value="0" constant="false"/>
-      <parameter id="nu" value="0.01" constant="true"/>
       <parameter id="alpha" value="0.01" constant="true"/>
       <parameter id="phi" value="0.01" constant="true"/>
       <parameter id="beta" value="0.01" constant="true"/>
@@ -136,15 +135,7 @@
             </apply>
             <apply>
               <times/>
-              <apply>
-                <divide/>
-                <ci> L_p </ci>
-                <apply>
-                  <plus/>
-                  <ci> nu </ci>
-                  <ci> L_p </ci>
-                </apply>
-              </apply>
+              <ci> L_p </ci>
               <ci> alpha </ci>
               <ci> C_i </ci>
             </apply>
@@ -160,15 +151,7 @@
               <apply>
                 <times/>
                 <ci> beta </ci>
-                <apply>
-                  <divide/>
-                  <ci> L_p </ci>
-                  <apply>
-                    <plus/>
-                    <ci> nu </ci>
-                    <ci> L_p </ci>
-                  </apply>
-                </apply>
+                <ci> L_p </ci>
                 <ci> alpha </ci>
                 <ci> C_i </ci>
               </apply>
@@ -198,15 +181,7 @@
             </apply>
             <apply>
               <times/>
-              <apply>
-                <divide/>
-                <ci> L_p </ci>
-                <apply>
-                  <plus/>
-                  <ci> nu </ci>
-                  <ci> L_p </ci>
-                </apply>
-              </apply>
+              <ci> L_p </ci>
               <ci> alpha </ci>
               <ci> L_p </ci>
             </apply>
