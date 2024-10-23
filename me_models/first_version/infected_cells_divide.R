@@ -116,8 +116,8 @@ data_final <- rbind(vvdd_melted, pbs_melted)
 # Display the first few rows
 head(data_final)
 
-# Assign initial values of V(0) based on GROUP
-data_final$V0_INIT <- ifelse(data_final$GROUP == "vvDD", 3 * 10^9, 0)
+# Assign initial values of V(0) based on GROUP and TIME
+data_final$V0_INIT <- ifelse(data_final$GROUP == "vvDD" & data_final$TIME == 0, 3 * 10^9, 0)
 
 # Log-transform the observed tumor volume data (DV)
 # data_final$DV <- log(data_final$DV + 1)  # Add a small constant to handle zeros if applicable
