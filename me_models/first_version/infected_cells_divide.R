@@ -120,13 +120,16 @@ head(data_final)
 data_final$V0_INIT <- ifelse(data_final$GROUP == "vvDD", 3 * 10^9, 0)
 
 # Log-transform the observed tumor volume data (DV)
-data_final$DV <- log(data_final$DV + 1)  # Add a small constant to handle zeros if applicable
+# data_final$DV <- log(data_final$DV + 1)  # Add a small constant to handle zeros if applicable
 
 # Convert data to data frame
 data_final <- as.data.frame(data_final)
 
 # Convert Group to factor (if not already)
 data_final$GROUP <- as.factor(data_final$GROUP)
+
+# Save data_final into a CSV file in the OV/data folder
+write.csv(data_final, "/Users/yuhongliu/Documents/OV/data/data_in_monolix_format.csv", row.names = FALSE)
 
 head(data_final)
 
