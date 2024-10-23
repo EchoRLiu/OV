@@ -6,14 +6,14 @@ Lp_model = """
 model Lp_model
 
   // ODE functions
-  C_u' = rho * C_u * (1 - kappa * (C_u + C_i)) - psi * V * C_u;
-  C_i' = rho * C_i * (1 - kappa * (C_u + C_i)) + psi * V * C_u - L_p * alpha * C_i;
-  L_p' = phi * C_i - alpha * L_p^100;
+  C_u' = rho * C_u * (1 - (C_u + C_i) / kappa) - psi * V * C_u;
+  C_i' = rho * C_i * (1 - (C_u + C_i) / kappa) + psi * V * C_u - L_p * alpha * C_i;
+  L_p' = phi * C_i - alpha * L_p * L_p;
   V' = beta * alpha * C_i - psi * V * C_u - delta * V;
 
   // initial conditions
   // t=0 is when the virus is injected
-  C_u = 1 / (kappa + exp(-rho) * (1/400 - kappa)); // number of uninfected tumor cells at t=0
+  C_u = 1 / (1/kappa + exp(-rho) * (1/400 - 1/kappa)); // number of uninfected tumor cells at t=0
   // 400 cells/nL is the number of tumor injected at t=-1
   C_i = 0; // number of infected tumor cells at t=0
   L_p = 0; // chance of lysis at t=0

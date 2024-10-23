@@ -4,8 +4,8 @@
     <listOfParameters>
       <parameter id="C_u" constant="false"/>
       <parameter id="rho" value="0.01" constant="true"/>
-      <parameter id="kappa" value="0.01" constant="true"/>
       <parameter id="C_i" value="0" constant="false"/>
+      <parameter id="kappa" value="0.01" constant="true"/>
       <parameter id="psi" value="0.01" constant="true"/>
       <parameter id="V" constant="false"/>
       <parameter id="L_p" value="0" constant="false"/>
@@ -23,7 +23,11 @@
             <cn type="integer"> 1 </cn>
             <apply>
               <plus/>
-              <ci> kappa </ci>
+              <apply>
+                <divide/>
+                <cn type="integer"> 1 </cn>
+                <ci> kappa </ci>
+              </apply>
               <apply>
                 <times/>
                 <apply>
@@ -40,7 +44,11 @@
                     <cn type="integer"> 1 </cn>
                     <cn type="integer"> 400 </cn>
                   </apply>
-                  <ci> kappa </ci>
+                  <apply>
+                    <divide/>
+                    <cn type="integer"> 1 </cn>
+                    <ci> kappa </ci>
+                  </apply>
                 </apply>
               </apply>
             </apply>
@@ -75,13 +83,13 @@
                 <minus/>
                 <cn type="integer"> 1 </cn>
                 <apply>
-                  <times/>
-                  <ci> kappa </ci>
+                  <divide/>
                   <apply>
                     <plus/>
                     <ci> C_u </ci>
                     <ci> C_i </ci>
                   </apply>
+                  <ci> kappa </ci>
                 </apply>
               </apply>
             </apply>
@@ -108,13 +116,13 @@
                   <minus/>
                   <cn type="integer"> 1 </cn>
                   <apply>
-                    <times/>
-                    <ci> kappa </ci>
+                    <divide/>
                     <apply>
                       <plus/>
                       <ci> C_u </ci>
                       <ci> C_i </ci>
                     </apply>
+                    <ci> kappa </ci>
                   </apply>
                 </apply>
               </apply>
@@ -173,11 +181,8 @@
             <apply>
               <times/>
               <ci> alpha </ci>
-              <apply>
-                <power/>
-                <ci> L_p </ci>
-                <cn type="integer"> 100 </cn>
-              </apply>
+              <ci> L_p </ci>
+              <ci> L_p </ci>
             </apply>
           </apply>
         </math>
