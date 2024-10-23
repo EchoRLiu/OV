@@ -176,3 +176,4 @@ models/5_Ci_dividing/optimization_history/*
 models/6_Ci_dividing_batch_effect/optimization_history/*
 .Rproj.user
 models/7_individual_start/optimization_history/*
+models/8_Lp/optimization_history/*
