@@ -8,7 +8,7 @@ model Lp_model
   // ODE functions
   C_u' = rho * C_u * (1 - (C_u + C_i) / kappa) - psi * V * C_u;
   C_i' = rho * C_i * (1 - (C_u + C_i) / kappa) + psi * V * C_u - (L_p / (nu + L_p)) * alpha * C_i;
-  L_p' = phi * C_i - alpha * L_p * L_p;
+  L_p' = phi * C_i - (L_p / (nu + L_p)) * alpha * L_p;
   V' = beta * (L_p / (nu + L_p)) * alpha * C_i - psi * V * C_u - delta * V;
 
   // initial conditions

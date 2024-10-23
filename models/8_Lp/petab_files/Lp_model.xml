@@ -198,8 +198,16 @@
             </apply>
             <apply>
               <times/>
+              <apply>
+                <divide/>
+                <ci> L_p </ci>
+                <apply>
+                  <plus/>
+                  <ci> nu </ci>
+                  <ci> L_p </ci>
+                </apply>
+              </apply>
               <ci> alpha </ci>
-              <ci> L_p </ci>
               <ci> L_p </ci>
             </apply>
           </apply>
