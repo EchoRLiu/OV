@@ -1,0 +1,2 @@
+parameter,statistics,p-value,test
+theta,0.931038,0.11906,Shapiro-Wilk

@@ -1,0 +1,6 @@
+time,empirical_median,empirical_lower,empirical_upper,theoretical_median,theoretical_lower,theoretical_upper,theoretical_median_piLower,theoretical_median_piUpper,theoretical_lower_piLower,theoretical_lower_piUpper,theoretical_upper_piLower,theoretical_upper_piUpper,split
+0,0.3174,-0.326432,0.966737,0,-1.28155,1.28155,-0.441759,0.441759,-1.84677,-0.716333,0.716333,1.84677,All
+1,0.240883,-0.282606,1.13095,0,-1.28155,1.28155,-0.441759,0.441759,-1.84677,-0.716333,0.716333,1.84677,All
+2,0.427962,-1.28199,1.06824,0,-1.28155,1.28155,-0.441759,0.441759,-1.84677,-0.716333,0.716333,1.84677,All
+3,0.00612151,-1.15657,1.56288,0,-1.28155,1.28155,-0.441759,0.441759,-1.84677,-0.716333,0.716333,1.84677,All
+4,0.200618,-1.8696,1.9842,0,-1.28155,1.28155,-0.441759,0.441759,-1.84677,-0.716333,0.716333,1.84677,All
