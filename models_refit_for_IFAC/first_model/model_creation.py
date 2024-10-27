@@ -30,6 +30,9 @@ model vvDD_effect
 
   // it seems like lambda is reserved and hence cannot be used as a parameter name
 
+  // Event to set C_u to zero when C_u falls below 1e-8
+  at (C_u < 1e-2): C_u = 0;
+
 end
 """
 
@@ -44,4 +47,4 @@ sbml_str_before = r.getSBML()
 # with open('petab_files/init_model.xml', 'w') as f:
 #     f.write(sbml_str_before)
 
-r.exportToSBML('petab_files/init_model.xml', current=False)
+r.exportToSBML('petab_files/init_model_event.xml', current=False)

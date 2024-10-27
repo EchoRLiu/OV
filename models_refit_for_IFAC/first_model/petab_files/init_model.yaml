@@ -8,6 +8,6 @@ problems:
     observable_files:
     - observables.tsv
     sbml_files:
-    - init_model.xml
+    - init_model_event.xml
     visualization_files:
     - visualization.tsv
