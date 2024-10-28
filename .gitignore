@@ -179,3 +179,4 @@ models/7_individual_start/optimization_history/*
 models/8_Lp/optimization_history/*
 models_refit_for_IFAC/first_model/optimization_history/*
 models_refit_for_IFAC/hidden_model/optimization_history/*
+models_refit_for_IFAC/Lp_model_1/optimization_history/*
