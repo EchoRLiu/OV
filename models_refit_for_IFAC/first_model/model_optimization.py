@@ -44,7 +44,7 @@ def main():
     # optimization
     hierarchical = False
 
-    petab_yaml = 'petab_files/init_model_noscaling_newnoise.yaml'
+    petab_yaml = 'petab_files/init_model_noscaling_newnoise_scaled.yaml'
     petab.validate(petab_yaml)
     petab_problem = petab.Problem.from_yaml(petab_yaml)
 
@@ -65,7 +65,7 @@ def main():
     print("Model states:    ", list(problem.objective.amici_model.getStateIds()), "\n")
 
     if load:
-        result = pypesto.store.read_result('optimization_history/n'+ str(n_runs) +'_noscaling_newnoise.hdf5')
+        result = pypesto.store.read_result('optimization_history/n'+ str(n_runs) +'_noscaling_newnoise_scaled.hdf5')
     else:
         result = minimize(
             problem=problem,
@@ -73,8 +73,8 @@ def main():
             n_starts=n_runs,
             engine=MultiProcessEngine(n_procs=n_procs),
             # startpoint_method=uniform,
-            history_options = pypesto.HistoryOptions(trace_record=True, storage_file='optimization_history/n'+ str(n_runs) +'_noscaling_newnoise.hdf5'),
-            filename='optimization_history/n'+ str(n_runs) +'_noscaling_newnoise.hdf5',
+            history_options = pypesto.HistoryOptions(trace_record=True, storage_file='optimization_history/n'+ str(n_runs) +'_noscaling_newnoise_scaled.hdf5'),
+            filename='optimization_history/n'+ str(n_runs) +'_noscaling_newnoise_scaled.hdf5',
         )
 
     # print result summary
