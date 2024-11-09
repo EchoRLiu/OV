@@ -182,3 +182,6 @@ models_refit_for_IFAC/hidden_model/optimization_history/*
 models_refit_for_IFAC/Lp_model_1/optimization_history/*
 models_refit_for_IFAC/individual_hidden_model/optimization_history/*
 models_refit_for_IFAC/hidden_model/amici_models/.DS_Store
+illustrations/fig1.svg
+illustrations/oncolytic_virus_mechanism_v2.pdf
+illustrations/ov_mechanism_data.pdf
