@@ -49,7 +49,7 @@ model dividing_infected_cells
   {' '.join(initial_conditions)}
 
   // condition dependent parameters
-  virus_injection = 3 * 1E9; // pfu
+  virus_injection = 1 * 1E9; // pfu
   
   // parameters to be estimated
   rho = 0.01;
@@ -63,6 +63,8 @@ model dividing_infected_cells
 
   // it seems like lambda is reserved and hence cannot be used as a parameter name
 
+  // Event to set C_u to zero when C_u falls below 1e-8
+  at (C_u < 1e-2): C_u = 0;
 end
 """
 
@@ -77,4 +79,4 @@ sbml_str_before = r.getSBML()
 # with open('petab_files/dividing_infected_cells_v3.xml', 'w') as f:
 #     f.write(sbml_str_before)
 
-r.exportToSBML('petab_files/dividing_infected_cells_v3.xml', current=False)
+r.exportToSBML('petab_files/dividing_infected_cells_event.xml', current=False)

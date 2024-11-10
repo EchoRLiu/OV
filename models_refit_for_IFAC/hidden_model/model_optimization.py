@@ -42,7 +42,7 @@ def main():
     n_procs = int(os.environ.get("SLURM_CPUS_ON_NODE", os.cpu_count()))
 
     # optimization
-    hierarchical = True
+    hierarchical = False
 
     petab_yaml = 'petab_files/dividing_infected_cells.yaml'
     petab.validate(petab_yaml)
@@ -65,7 +65,7 @@ def main():
     print("Model states:    ", list(problem.objective.amici_model.getStateIds()), "\n")
 
     if load:
-        result = pypesto.store.read_result('optimization_history/n'+ str(n_runs) +'_v4.hdf5')
+        result = pypesto.store.read_result('optimization_history/n'+ str(n_runs) +'_v1.hdf5')
     else:
         result = minimize(
             problem=problem,
@@ -73,8 +73,8 @@ def main():
             n_starts=n_runs,
             engine=MultiProcessEngine(n_procs=n_procs),
             # startpoint_method=uniform,
-            history_options = pypesto.HistoryOptions(trace_record=True, storage_file='optimization_history/n'+ str(n_runs) +'_v4.hdf5'),
-            filename='optimization_history/n'+ str(n_runs) +'_v4.hdf5',
+            history_options = pypesto.HistoryOptions(trace_record=True, storage_file='optimization_history/n'+ str(n_runs) +'_v1.hdf5'),
+            filename='optimization_history/n'+ str(n_runs) +'_v1.hdf5',
         )
 
     # print result summary
