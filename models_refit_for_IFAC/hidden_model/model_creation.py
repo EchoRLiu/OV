@@ -12,7 +12,7 @@ without the following:
 # Generate ODE functions and initial conditions
 ode_functions = []
 initial_conditions = []
-n_hidden = 5
+n_hidden = 10
 
 # ODE for C_u
 ode_functions.append("C_u' = rho * C_u * (1 - (C_u + C_i + " + " + ".join([f"C_i{j}" for j in range(1, n_hidden + 1)]) + " + C_l)/kappa) - psi * V * C_u;")
@@ -79,4 +79,4 @@ sbml_str_before = r.getSBML()
 # with open('petab_files/dividing_infected_cells_v3.xml', 'w') as f:
 #     f.write(sbml_str_before)
 
-r.exportToSBML('petab_files/dividing_infected_cells_event.xml', current=False)
+r.exportToSBML('petab_files/dividing_infected_cells_event_n=10.xml', current=False)
