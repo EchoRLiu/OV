@@ -17,7 +17,7 @@ model vvDD_effect
   V = virus_injection; // number of virus injected at t=0
 
   // condition dependent parameters
-  virus_injection = 3 * 1E9; // pfu
+  virus_injection = 1 * 1E9; // pfu
   
   // parameters to be estimated
   rho = 0.01;

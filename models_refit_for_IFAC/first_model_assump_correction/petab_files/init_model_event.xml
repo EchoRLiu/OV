@@ -105,10 +105,31 @@
           <apply>
             <minus/>
             <apply>
-              <times/>
-              <ci> psi </ci>
-              <ci> V </ci>
-              <ci> C_u </ci>
+              <plus/>
+              <apply>
+                <times/>
+                <ci> rho </ci>
+                <ci> C_i </ci>
+                <apply>
+                  <minus/>
+                  <cn type="integer"> 1 </cn>
+                  <apply>
+                    <divide/>
+                    <apply>
+                      <plus/>
+                      <ci> C_u </ci>
+                      <ci> C_i </ci>
+                    </apply>
+                    <ci> kappa </ci>
+                  </apply>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <ci> psi </ci>
+                <ci> V </ci>
+                <ci> C_u </ci>
+              </apply>
             </apply>
             <apply>
               <times/>
