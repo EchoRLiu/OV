@@ -1,5 +1,5 @@
 format_version: 1
-parameter_file: parameters_no_scaling_new_noise_formula.tsv
+parameter_file: parameters_no_scaling_new_noise_formula_v2.tsv
 problems:
   - condition_files:
     - conditions.tsv
