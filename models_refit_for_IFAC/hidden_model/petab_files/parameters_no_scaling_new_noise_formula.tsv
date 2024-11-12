@@ -1,5 +1,5 @@
 parameterId	parameterName	parameterScale	lowerBound	upperBound	nominalValue	estimate	parameterType
-rho	rho	log10	0.01	10.0	1	1	
+rho	rho	log10	0.42	1.66	1	1	
 kappa	kappa	log10	100.0	100000.0	1	1	
 psi	psi	log10	1e-10	0.01	1	1	
 phi	phi	log10	1e-08	100000000.0	1	1	
