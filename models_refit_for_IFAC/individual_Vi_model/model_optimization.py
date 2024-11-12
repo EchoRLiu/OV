@@ -44,7 +44,7 @@ def main():
     # optimization
     hierarchical = False
 
-    petab_yaml = 'petab_files/Vi_model_event.yaml'
+    petab_yaml = 'petab_files/individual_Vi_model_event.yaml'
     petab.validate(petab_yaml)
     petab_problem = petab.Problem.from_yaml(petab_yaml)
 
@@ -53,7 +53,7 @@ def main():
     problem = pypesto.petab.PetabImporter(
             petab_problem,
             hierarchical=hierarchical,
-            model_name=f"LP_Model",
+            model_name=f"individual_Vi_Model",
         ).create_problem(force_compile=True)
     
     problem.objective.amici_model.setAllStatesNonNegative()

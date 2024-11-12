@@ -8,6 +8,6 @@ problems:
     observable_files:
     - observables_no_scaling_new_noise_formula_scaled.tsv
     sbml_files:
-    - Vi_model_event.xml
+    - individual_Vi_model_event.xml
     visualization_files:
     - visualization.tsv

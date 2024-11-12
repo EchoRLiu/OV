@@ -13,7 +13,7 @@ model Vi_model_event
 
   // initial conditions
   // t=0 is when the virus is injected
-  C_u = 1 / (1/kappa + exp(-rho) * (1/400 - 1/kappa)); // number of uninfected tumor cells at t=0
+  C_u = 1 / (1/kappa + exp(-rho) * (1/(400*ini_theta) - 1/kappa)); // number of uninfected tumor cells at t=0
   // 400 cells/nL is the number of tumor injected at t=-1
   C_i = 0.0; // number of infected tumor cells at t=0
   V_i = 0.0; // chance of lysis at t=0
@@ -21,6 +21,7 @@ model Vi_model_event
 
   // condition dependent parameters
   virus_injection = 1 * 1E9; // pfu
+  ini_theta = 1;
   
   // parameters to be estimated
   rho = 0.01;
@@ -47,7 +48,7 @@ ant_str_before = r.getAntimony()
 sbml_str_before = r.getSBML()
 
 # write xml file
-# with open('petab_files/Vi_model_event.xml', 'w') as f:
+# with open('petab_files/individual_Vi_model_event.xml', 'w') as f:
 #     f.write(sbml_str_before)
 
-r.exportToSBML('petab_files/Vi_model_event.xml', current=False)
+r.exportToSBML('petab_files/individual_Vi_model_event.xml', current=False)

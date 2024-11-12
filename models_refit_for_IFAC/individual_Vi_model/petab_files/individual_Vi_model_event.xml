@@ -13,6 +13,7 @@
       <parameter id="psi_2" value="0.01" constant="true"/>
       <parameter id="zeta" value="0.01" constant="true"/>
       <parameter id="delta" value="0.01" constant="true"/>
+      <parameter id="ini_theta" value="1" constant="true"/>
       <parameter id="virus_injection" constant="true"/>
     </listOfParameters>
     <listOfInitialAssignments>
@@ -42,7 +43,11 @@
                   <apply>
                     <divide/>
                     <cn type="integer"> 1 </cn>
-                    <cn type="integer"> 400 </cn>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> 400 </cn>
+                      <ci> ini_theta </ci>
+                    </apply>
                   </apply>
                   <apply>
                     <divide/>
