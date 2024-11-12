@@ -160,7 +160,7 @@
                   <apply>
                     <plus/>
                     <ci> C_i </ci>
-                    <cn type="e-notation"> 1 <sep/> -33 </cn>
+                    <cn type="e-notation"> 1 <sep/> -6 </cn>
                   </apply>
                 </apply>
                 <apply>
@@ -220,7 +220,7 @@
               <apply>
                 <plus/>
                 <ci> C_i </ci>
-                <cn type="e-notation"> 1 <sep/> -33 </cn>
+                <cn type="e-notation"> 1 <sep/> -6 </cn>
               </apply>
             </apply>
           </apply>
