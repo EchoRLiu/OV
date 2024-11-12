@@ -65,7 +65,7 @@ def main():
     print("Model states:    ", list(problem.objective.amici_model.getStateIds()), "\n")
 
     if load:
-        result = pypesto.store.read_result('optimization_history/n'+ str(n_runs) +'_v3_large_bounds.hdf5')
+        result = pypesto.store.read_result('optimization_history/n'+ str(n_runs) +'_diff_scale.hdf5')
     else:
         result = minimize(
             problem=problem,
@@ -73,8 +73,8 @@ def main():
             n_starts=n_runs,
             engine=MultiProcessEngine(n_procs=n_procs),
             # startpoint_method=uniform,
-            history_options = pypesto.HistoryOptions(trace_record=True, storage_file='optimization_history/n'+ str(n_runs) +'_v3_large_bounds.hdf5'),
-            filename='optimization_history/n'+ str(n_runs) +'_v3_large_bounds.hdf5',
+            history_options = pypesto.HistoryOptions(trace_record=True, storage_file='optimization_history/n'+ str(n_runs) +'_diff_scale.hdf5'),
+            filename='optimization_history/n'+ str(n_runs) +'_diff_scale.hdf5',
         )
 
     # print result summary
