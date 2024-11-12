@@ -8,16 +8,16 @@ model Vi_model_event
   // ODE functions
   C_u' = rho * C_u * (1 - (C_u + C_i) / kappa) - psi_1 * V_e * C_u;
   C_i' = rho * C_i * (1 - (C_u + C_i) / kappa) + psi_1 * V_e * C_u - alpha * V_i;
-  V_i' = psi_1 * V_e * C_u + psi_2 * V_e * C_i + zeta * C_i - alpha * V_i * V_i / C_i;
-  V_e' = alpha * V_i * V_i / C_i - psi_1 * V_e * C_u - psi_2 * V_e * C_i - delta * V_e;
+  V_i' = psi_1 * V_e * C_u + psi_2 * V_e * C_i + zeta * C_i - alpha * V_i * V_i / (C_i + 1e-15);
+  V_e' = alpha * V_i * V_i / (C_i + 1e-15) - psi_1 * V_e * C_u - psi_2 * V_e * C_i - delta * V_e;
 
   // initial conditions
   // t=0 is when the virus is injected
   C_u = 1 / (1/kappa + exp(-rho) * (1/400 - 1/kappa)); // number of uninfected tumor cells at t=0
   // 400 cells/nL is the number of tumor injected at t=-1
-  C_i = 1e-12; // number of infected tumor cells at t=0
-  V_i = 1e-12; // chance of lysis at t=0
-  V_e = 1e-12 + virus_injection; // number of virus injected at t=0
+  C_i = 0.0; // number of infected tumor cells at t=0
+  V_i = 0.0; // chance of lysis at t=0
+  V_e = virus_injection; // number of virus injected at t=0
 
   // condition dependent parameters
   virus_injection = 1 * 1E9; // pfu

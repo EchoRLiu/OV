@@ -4,12 +4,12 @@
     <listOfParameters>
       <parameter id="C_u" constant="false"/>
       <parameter id="rho" value="0.01" constant="true"/>
-      <parameter id="C_i" value="1e-12" constant="false"/>
+      <parameter id="C_i" value="0" constant="false"/>
       <parameter id="kappa" value="0.01" constant="true"/>
       <parameter id="psi_1" value="0.01" constant="true"/>
       <parameter id="V_e" constant="false"/>
       <parameter id="alpha" value="0.01" constant="true"/>
-      <parameter id="V_i" value="1e-12" constant="false"/>
+      <parameter id="V_i" value="0" constant="false"/>
       <parameter id="psi_2" value="0.01" constant="true"/>
       <parameter id="zeta" value="0.01" constant="true"/>
       <parameter id="delta" value="0.01" constant="true"/>
@@ -57,11 +57,7 @@
       </initialAssignment>
       <initialAssignment symbol="V_e">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <plus/>
-            <cn type="e-notation"> 1 <sep/> -12 </cn>
-            <ci> virus_injection </ci>
-          </apply>
+          <ci> virus_injection </ci>
         </math>
       </initialAssignment>
       <initialAssignment symbol="virus_injection">
@@ -161,7 +157,11 @@
                     <ci> V_i </ci>
                     <ci> V_i </ci>
                   </apply>
-                  <ci> C_i </ci>
+                  <apply>
+                    <plus/>
+                    <ci> C_i </ci>
+                    <cn type="e-notation"> 1 <sep/> -15 </cn>
+                  </apply>
                 </apply>
                 <apply>
                   <times/>
@@ -217,7 +217,11 @@
                 <ci> V_i </ci>
                 <ci> V_i </ci>
               </apply>
-              <ci> C_i </ci>
+              <apply>
+                <plus/>
+                <ci> C_i </ci>
+                <cn type="e-notation"> 1 <sep/> -15 </cn>
+              </apply>
             </apply>
           </apply>
         </math>
