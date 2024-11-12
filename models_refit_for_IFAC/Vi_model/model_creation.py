@@ -8,8 +8,8 @@ model Vi_model_event
   // ODE functions
   C_u' = rho * C_u * (1 - (C_u + C_i) / kappa) - psi_1 * V_e * C_u;
   C_i' = rho * C_i * (1 - (C_u + C_i) / kappa) + psi_1 * V_e * C_u - alpha * V_i;
-  V_i' = psi_1 * V_e * C_u + psi_2 * V_e * C_i + zeta * C_i - alpha * V_i * V_i / (C_i + 1e-15);
-  V_e' = alpha * V_i * V_i / (C_i + 1e-15) - psi_1 * V_e * C_u - psi_2 * V_e * C_i - delta * V_e;
+  V_i' = psi_1 * V_e * C_u + psi_2 * V_e * C_i + zeta * C_i - alpha * V_i * V_i / (C_i + 1e-33);
+  V_e' = alpha * V_i * V_i / (C_i + 1e-33) - psi_1 * V_e * C_u - psi_2 * V_e * C_i - delta * V_e;
 
   // initial conditions
   // t=0 is when the virus is injected
