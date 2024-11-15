@@ -191,3 +191,8 @@ models_refit_for_IFAC/first_model_assump_correction/optimization_history/*
 models_refit_for_IFAC/individual_Vi_model/optimization_history/*
 models_refit_for_IFAC/individual_Vi_model/optimization_history_bad/*
 models_refit_for_IFAC/Lp_model/optimization_history/*
+models_refit_for_IFAC/individual_hidden_model_corrected/optimization_history/*
+illustrations/fig1.pdf
+illustrations/fig2.svg
+illustrations/oncolytic_virus_mechanism_v3.pdf
+illustrations/*
