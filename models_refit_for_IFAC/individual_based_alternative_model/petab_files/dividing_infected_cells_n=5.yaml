@@ -1,0 +1,13 @@
+format_version: 1
+parameter_file: parameters_no_scaling_new_noise_formula.tsv
+problems:
+  - condition_files:
+    - conditions.tsv
+    measurement_files:
+    - measurements_noscaling_newnoise_scaled.tsv
+    observable_files:
+    - observables_no_scaling_new_noise_formula_scaled_n=5.tsv
+    sbml_files:
+    - individual_hidden_event_n=5.xml
+    visualization_files:
+    - visualization.tsv

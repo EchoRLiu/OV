@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
+  <model metaid="vvDD_effect" id="vvDD_effect">
+    <listOfParameters>
+      <parameter id="C_u" constant="false"/>
+      <parameter id="rho" value="0.01" constant="true"/>
+      <parameter id="C_i" value="0" constant="false"/>
+      <parameter id="kappa" value="0.01" constant="true"/>
+      <parameter id="psi" value="0.01" constant="true"/>
+      <parameter id="V" constant="false"/>
+      <parameter id="alpha" value="0.01" constant="true"/>
+      <parameter id="beta" value="0.01" constant="true"/>
+      <parameter id="delta" value="0.01" constant="true"/>
+      <parameter id="virus_injection" constant="true"/>
+    </listOfParameters>
+    <listOfInitialAssignments>
+      <initialAssignment symbol="C_u">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <cn type="integer"> 1 </cn>
+            <apply>
+              <plus/>
+              <apply>
+                <divide/>
+                <cn type="integer"> 1 </cn>
+                <ci> kappa </ci>
+              </apply>
+              <apply>
+                <times/>
+                <apply>
+                  <exp/>
+                  <apply>
+                    <minus/>
+                    <ci> rho </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <minus/>
+                  <apply>
+                    <divide/>
+                    <cn type="integer"> 1 </cn>
+                    <cn type="integer"> 400 </cn>
+                  </apply>
+                  <apply>
+                    <divide/>
+                    <cn type="integer"> 1 </cn>
+                    <ci> kappa </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="V">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> virus_injection </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="virus_injection">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <cn type="integer"> 3 </cn>
+            <cn type="integer"> 1000000000 </cn>
+          </apply>
+        </math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+    <listOfRules>
+      <rateRule variable="C_u">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <times/>
+              <ci> rho </ci>
+              <ci> C_u </ci>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <apply>
+                  <divide/>
+                  <apply>
+                    <plus/>
+                    <ci> C_u </ci>
+                    <ci> C_i </ci>
+                  </apply>
+                  <ci> kappa </ci>
+                </apply>
+              </apply>
+            </apply>
+            <apply>
+              <times/>
+              <ci> psi </ci>
+              <ci> V </ci>
+              <ci> C_u </ci>
+            </apply>
+          </apply>
+        </math>
+      </rateRule>
+      <rateRule variable="C_i">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <times/>
+              <ci> psi </ci>
+              <ci> V </ci>
+              <ci> C_u </ci>
+            </apply>
+            <apply>
+              <times/>
+              <ci> alpha </ci>
+              <ci> C_i </ci>
+            </apply>
+          </apply>
+        </math>
+      </rateRule>
+      <rateRule variable="V">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> beta </ci>
+                <ci> alpha </ci>
+                <ci> C_i </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> psi </ci>
+                <ci> V </ci>
+                <ci> C_u </ci>
+              </apply>
+            </apply>
+            <apply>
+              <times/>
+              <ci> delta </ci>
+              <ci> V </ci>
+            </apply>
+          </apply>
+        </math>
+      </rateRule>
+    </listOfRules>
+  </model>
+</sbml>

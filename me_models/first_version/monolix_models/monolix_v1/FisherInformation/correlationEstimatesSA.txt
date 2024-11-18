@@ -1,0 +1,3 @@
+theta_pop,1,0.113667,nan
+omega_theta,0.113667,1,nan
+b,nan,nan,nan

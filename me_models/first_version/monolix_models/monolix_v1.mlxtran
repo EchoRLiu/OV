@@ -1,0 +1,82 @@
+<DATAFILE>
+
+[FILEINFO]
+file={path='../../data/data_in_monolix_format.csv'}
+delimiter = comma
+header={TIME, ID, DV, GROUP, V0_INIT}
+
+[CONTENT]
+TIME = {use=time}
+ID = {use=identifier}
+DV = {use=observation, type=continuous}
+GROUP = {use=covariate, type=categorical}
+V0_INIT = {use=amount}
+
+<MODEL>
+
+[COVARIATE]
+input = GROUP
+
+GROUP = {type=categorical, categories={'ctrl', 'vvDD'}}
+
+[INDIVIDUAL]
+input = {alpha_pop, beta_pop, delta_pop, kappa_pop, phi_pop, psi_pop, rho_pop, scaling_pop, theta_pop, omega_theta}
+
+DEFINITION:
+alpha = {distribution=normal, typical=alpha_pop, no-variability}
+beta = {distribution=normal, typical=beta_pop, no-variability}
+delta = {distribution=normal, typical=delta_pop, no-variability}
+kappa = {distribution=normal, typical=kappa_pop, no-variability}
+phi = {distribution=normal, typical=phi_pop, no-variability}
+psi = {distribution=normal, typical=psi_pop, no-variability}
+rho = {distribution=normal, typical=rho_pop, no-variability}
+scaling = {distribution=normal, typical=scaling_pop, no-variability}
+theta = {distribution=normal, typical=theta_pop, sd=omega_theta}
+
+[LONGITUDINAL]
+input = {b}
+
+file = 'monolix_model.txt'
+
+DEFINITION:
+DV = {distribution=normal, prediction=tumor_vol, errorModel=proportional(b)}
+
+<FIT>
+data = 'DV'
+model = DV
+
+<PARAMETER>
+alpha_pop = {value=-1.70462461016, method=FIXED}
+b = {value=0.3, method=MLE}
+beta_pop = {value=33.3448279233, method=FIXED}
+c = {value=1, method=FIXED}
+delta_pop = {value=3.40287755402, method=FIXED}
+kappa_pop = {value=6.65517810407, method=FIXED}
+omega_theta = {value=1, method=MLE}
+phi_pop = {value=-4.32950143541, method=FIXED}
+psi_pop = {value=-26.6715210649, method=FIXED}
+rho_pop = {value=-0.653520157609, method=FIXED}
+scaling_pop = {value=5714.73489735, method=FIXED}
+theta_pop = {value=4, method=MLE}
+
+<MONOLIX>
+
+[TASKS]
+populationParameters()
+individualParameters(method = {conditionalMean, conditionalMode })
+fim(run = false,method = StochasticApproximation)
+logLikelihood(run = false,method = ImportanceSampling)
+
+[PLOTS]
+run = true
+plots = {indfits = {selected = true}, parameterdistribution = {selected = true}, obspred = {selected = true}, covariancemodeldiagnosis = {selected = true}, covariatemodeldiagnosis = {selected = true}, vpc = {selected = true}, residualsscatter = {selected = true}, residualsdistribution = {selected = true}, randomeffects = {selected = true}, saemresults = {selected = true}}
+
+[SETTINGS]
+GLOBAL:
+exportpath = 'monolix_v1'
+
+POPULATION:
+burniniterations = 100
+exploratoryiterations = 5000
+simulatedannealingiterations = 5000
+
