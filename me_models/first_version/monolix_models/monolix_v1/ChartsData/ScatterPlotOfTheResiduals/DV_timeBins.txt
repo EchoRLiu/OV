@@ -1,7 +1,0 @@
-bins_values,split
-0,All
-0.5,All
-1.5,All
-2.5,All
-3.5,All
-4,All

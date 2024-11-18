@@ -1,2 +1,0 @@
-eta,covariate,statistics,p-value,test
-eta_theta,GROUP,0.612293,0.444099,Anova
