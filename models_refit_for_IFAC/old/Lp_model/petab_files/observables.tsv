@@ -1,2 +1,0 @@
-observableId	observableName	observableFormula	noiseFormula	noiseDistribution	observableTransformation
-tumor_vol	tumor_volume	observableParameter1_tumor_vol * (C_u + C_i)	noiseParameter1_tumor_vol	normal	lin
