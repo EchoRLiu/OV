@@ -163,37 +163,9 @@ cython_debug/
 
 
 # folder for storing the results
-models/first_model/optimization_history/*
-models/second_model/optimization_history/*
-figures/*
-models/second_model_dynamics_test/optimization_history/*
-models/second_model_dynamics_test2/optimization_history/*
-models/second_model_dynamics_test3/optimization_history/*
-models/third_model/optimization_history/*
-models/third_model_1000/optimization_history/*
-models/4_infection_model/optimization_history/*
-models/5_Ci_dividing/optimization_history/*
-models/6_Ci_dividing_batch_effect/optimization_history/*
-.Rproj.user
-models/7_individual_start/optimization_history/*
-models/8_Lp/optimization_history/*
-models_refit_for_IFAC/first_model/optimization_history/*
-models_refit_for_IFAC/alternative_model/optimization_history_old/*
-models_refit_for_IFAC/alternative_model/optimization_history/*
-models_refit_for_IFAC/old/Vi_model/optimization_history/*
-models_refit_for_IFAC/old/Vi_model/optimization_history_old/*
-models_refit_for_IFAC/old/individual_hidden_model/optimization_history/*
-illustrations/fig1.svg
-illustrations/oncolytic_virus_mechanism_v2.pdf
-illustrations/ov_mechanism_data.pdf
-models_refit_for_IFAC/baseline_model/optimization_history/*
-models_refit_for_IFAC/old/individual_Vi_model/optimization_history/*
-models_refit_for_IFAC/old/individual_Vi_model/optimization_history_bad/*
-models_refit_for_IFAC/old/Lp_model/optimization_history/*
-models_refit_for_IFAC/individual_based_alternative_model/optimization_history/*
-illustrations/fig1.pdf
-illustrations/fig2.svg
-illustrations/oncolytic_virus_mechanism_v3.pdf
-illustrations/*
+model/baseline_model/optimization_history/*
+model/alternative_model/optimization_history/*
+model/individual_based_alternative_model/optimization_history/*
+
 **/.DS_Store
 wasteland/*
