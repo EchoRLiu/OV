@@ -178,12 +178,11 @@ models/6_Ci_dividing_batch_effect/optimization_history/*
 models/7_individual_start/optimization_history/*
 models/8_Lp/optimization_history/*
 models_refit_for_IFAC/first_model/optimization_history/*
-models_refit_for_IFAC/hidden_model/optimization_history_old/*
-models_refit_for_IFAC/hidden_model/optimization_history/*
+models_refit_for_IFAC/alternative_model/optimization_history_old/*
+models_refit_for_IFAC/alternative_model/optimization_history/*
 models_refit_for_IFAC/old/Vi_model/optimization_history/*
 models_refit_for_IFAC/old/Vi_model/optimization_history_old/*
 models_refit_for_IFAC/old/individual_hidden_model/optimization_history/*
-models_refit_for_IFAC/old/hidden_model/amici_models/.DS_Store
 illustrations/fig1.svg
 illustrations/oncolytic_virus_mechanism_v2.pdf
 illustrations/ov_mechanism_data.pdf
