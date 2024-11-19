@@ -161,11 +161,10 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+##############################################################
 
 # folder for storing the results
-model/baseline_model/optimization_history/*
-model/alternative_model/optimization_history/*
-model/individual_based_alternative_model/optimization_history/*
-
+*.out
+*.hdf5
 **/.DS_Store
 wasteland/*
