@@ -1,4 +1,6 @@
-![Oncolytic Virus (vvDD) Mechanism](figure/illustration/ov_mechanism.png)
+<p align="center">
+  <img src="figure/illustration/ov_mechanism.png" alt="Oncolytic Virus (vvDD) Mechanism" width="100">
+</p>
 
 # Parameter Estimation and Model Selection for the Quantitative Analysis of Oncolytic Virus Therapy in Zebrafish Embryos
 
@@ -29,11 +31,11 @@ cd individual_based_alternative_model
 
 in each model folder, there are files:
 
-    - `model_creation.py`: create the `.xml` model file
-    - `petab_files_creation.ipynb`: build petab files defining the optimization problem
-    - `model_optimization.py`: perform optimization 
-    - `visualization.ipynb`: visualize the optimization results
-    - `check_gradients.ipynb`: double check the gradients of the model
+- `model_creation.py`: create the `.xml` model file
+- `petab_files_creation.ipynb`: build petab files defining the optimization problem
+- `model_optimization.py`: perform optimization 
+- `visualization.ipynb`: visualize the optimization results
+- `check_gradients.ipynb`: double check the gradients of the model
 
 ## Contact
 If you have any questions, please feel free to contact any of the authors:
