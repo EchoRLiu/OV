@@ -3,7 +3,7 @@
 # Parameter Estimation and Model Selection for the Quantitative Analysis of Oncolytic Virus Therapy in Zebrafish Embryos
 
 ## Overview
-This repository contains the code accompanying the paper *Parameter Estimation and Model Selection for the Quantitative Analysis of Oncolytic Virus Therapy in Zebrafish Embryos*
+This repository contains the code accompanying the paper, *Parameter Estimation and Model Selection for the Quantitative Analysis of Oncolytic Virus Therapy in Zebrafish Embryos (submitted to IFAC DYCOPS 2025)*
 
 ## Requirement
 
@@ -28,6 +28,7 @@ cd individual_based_alternative_model
     - individual-based alternative model
 
 in each model folder, there are files:
+
     - `model_creation.py`: create the `.xml` model file
     - `petab_files_creation.ipynb`: build petab files defining the optimization problem
     - `model_optimization.py`: perform optimization 
@@ -41,7 +42,3 @@ If you have any questions, please feel free to contact any of the authors:
 - Jan Hasenauer (jan.hasenauer@uni-bonn.de)
 
 or create an issue
-
-**Affiliation**:
-
-Life and Medical Sciences (LIMES) Institute & Bonn Center for Mathematical Life Sciences, University of Bonn, 53115 Bonn Germany.
