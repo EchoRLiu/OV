@@ -168,4 +168,11 @@ model/alternative_model/optimization_history/*
 model/individual_based_alternative_model/optimization_history/*
 
 **/.DS_Store
-wasteland/*
+wasteland/figures/*
+wasteland/illustrations/*
+**/.hdf5
+**/.out
+
+wasteland/me_models/*
+wasteland/models/*
+wasteland/models_refit_for_IFAC/*
