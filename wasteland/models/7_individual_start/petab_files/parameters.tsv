@@ -1,0 +1,30 @@
+parameterId	parameterName	parameterScale	lowerBound	upperBound	nominalValue	estimate	parameterType
+rho	rho	log10	0.0001	10000.0	1	1	
+kappa	kappa	log10	0.0001	10000.0	1	1	
+psi	psi	log10	0.0001	10000.0	1	1	
+phi	phi	log10	0.0001	10000.0	1	1	
+beta	beta	log10	0.0001	10000.0	1	1	
+alpha	alpha	log10	0.0001	10000.0	1	1	
+delta	delta	log10	0.0001	10000.0	1	1	
+nu_c_1	nu_c_1	log10	0.0001	10000.0	1	1	
+nu_c_2	nu_c_2	log10	0.0001	10000.0	1	1	
+nu_c_3	nu_c_3	log10	0.0001	10000.0	1	1	
+nu_c_4	nu_c_4	log10	0.0001	10000.0	1	1	
+nu_c_5	nu_c_5	log10	0.0001	10000.0	1	1	
+nu_c_6	nu_c_6	log10	0.0001	10000.0	1	1	
+nu_c_7	nu_c_7	log10	0.0001	10000.0	1	1	
+nu_c_8	nu_c_8	log10	0.0001	10000.0	1	1	
+nu_c_9	nu_c_9	log10	0.0001	10000.0	1	1	
+nu_c_10	nu_c_10	log10	0.0001	10000.0	1	1	
+nu_v_1	nu_v_1	log10	0.0001	10000.0	1	1	
+nu_v_2	nu_v_2	log10	0.0001	10000.0	1	1	
+nu_v_3	nu_v_3	log10	0.0001	10000.0	1	1	
+nu_v_4	nu_v_4	log10	0.0001	10000.0	1	1	
+nu_v_5	nu_v_5	log10	0.0001	10000.0	1	1	
+nu_v_6	nu_v_6	log10	0.0001	10000.0	1	1	
+nu_v_7	nu_v_7	log10	0.0001	10000.0	1	1	
+nu_v_8	nu_v_8	log10	0.0001	10000.0	1	1	
+nu_v_9	nu_v_9	log10	0.0001	10000.0	1	1	
+nu_v_10	nu_v_10	log10	0.0001	10000.0	1	1	
+scaling_1	scaling_1	lin	0.0001	10000.0	1	1	scaling
+sd_vol	sd_vol	lin	0.0	inf	1	1	sigma
