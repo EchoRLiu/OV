@@ -1,0 +1,13 @@
+bins_values,split
+0,#GROUP:ctrl
+0.5,#GROUP:ctrl
+1.5,#GROUP:ctrl
+2.5,#GROUP:ctrl
+3.5,#GROUP:ctrl
+4,#GROUP:ctrl
+0,#GROUP:vvDD
+0.5,#GROUP:vvDD
+1.5,#GROUP:vvDD
+2.5,#GROUP:vvDD
+3.5,#GROUP:vvDD
+4,#GROUP:vvDD

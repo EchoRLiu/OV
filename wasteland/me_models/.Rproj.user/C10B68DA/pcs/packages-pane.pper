@@ -1,0 +1,7 @@
+{
+    "installOptions": {
+        "installFromRepository": false,
+        "libraryPath": "/Users/yuhongliu/Documents/OV/me_models/renv/library/macos/R-4.4/aarch64-apple-darwin20",
+        "installDependencies": true
+    }
+}
