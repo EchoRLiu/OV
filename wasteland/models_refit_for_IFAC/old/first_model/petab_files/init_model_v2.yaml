@@ -1,0 +1,13 @@
+format_version: 1
+parameter_file: parameters_v2.tsv
+problems:
+  - condition_files:
+    - conditions.tsv
+    measurement_files:
+    - measurements.tsv
+    observable_files:
+    - observables.tsv
+    sbml_files:
+    - init_model_event.xml
+    visualization_files:
+    - visualization.tsv
