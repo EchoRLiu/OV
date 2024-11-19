@@ -8,7 +8,12 @@
 This repository contains the code accompanying the paper, *Parameter Estimation and Model Selection for the Quantitative Analysis of Oncolytic Virus Therapy in Zebrafish Embryos (submitted to IFAC DYCOPS 2025)*
 
 ## Requirement
-
+After installing all the code using `git clone https://github.com/EchoRLiu/OV.git`, run the following command in the project folder to creat a virtual environment and install all the necessary packages
+```
+python -m venv env
+source env/bin/activate
+pip install -v -r requirements.txt
+```
 
 ## Tutorial
 **Quickstart**
