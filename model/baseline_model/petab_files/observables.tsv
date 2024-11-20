@@ -1,2 +1,2 @@
 observableId	observableName	observableFormula	noiseFormula	noiseDistribution	observableTransformation
-tumor_num	tumor_number	C_u + C_i	sqrt(sigma_add^2 + (sigma_mul * (C_u + C_i))^2)	normal	lin
+tumor_num	tumor_number	U + I	sqrt(sigma_a^2 + (sigma_b * (U + I))^2)	normal	lin
