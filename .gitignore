@@ -167,3 +167,4 @@ cython_debug/
 *.out
 *.hdf5
 **/.DS_Store
+figure/baseline_model/*
