@@ -2,6 +2,7 @@ import os
 import numpy as np
 import petab
 import pypesto
+import pypesto.petab
 from pypesto.optimize import minimize, FidesOptimizer
 from pypesto.engine import MultiProcessEngine
 
