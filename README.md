@@ -21,7 +21,7 @@ To try one of the models,
 
 1) first go to the model folder, e.g.:
 ```
-cd individual_based_alternative_model
+cd individual_based_age_of_infection_model
 ```
 2) run the ... 
 
@@ -31,8 +31,8 @@ cd individual_based_alternative_model
 - **figure/**: contains figure output from `visualization.ipynb` for each model, e.g. model fits
 - **model/**: contains the following three models listed in the paper:
     - baseline model
-    - alternative model
-    - individual-based alternative model
+    - age of infection model
+    - individual-based age of infection model
 
 in each model folder, there are files:
 
