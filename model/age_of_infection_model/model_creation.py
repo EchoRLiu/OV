@@ -1,45 +1,34 @@
 import tellurium as te
 import libsbml
 
-"""
-the fifth model includes the delayed lysis model, where the infected cells can still divie into more infected cells
-with five hidden state
-without the following:
-  # // temporal infection rate
-  # psi := psi_0 * exp(- tau * time);
-"""
-
 # Generate ODE functions and initial conditions
 ode_functions = []
 initial_conditions = []
-n_hidden = 10
+L = 5
 
-# ODE for C_u
-ode_functions.append("C_u' = rho * C_u * (1 - (C_u + C_i + " + " + ".join([f"C_i{j}" for j in range(1, n_hidden + 1)]) + " + C_l)/kappa) - psi * V * C_u;")
-initial_conditions.append("C_u = 1 / (1/kappa + exp(-rho) * (1/400 - 1/kappa));")
+# ODE for U
+ode_functions.append("U' = rho * U * (1 - (U + " + " + ".join([f"I_{j}" for j in range(1, L+1)]) + ")/kappa) - psi * V * U;")
+initial_conditions.append("U = kappa / (1 + (kappa/400 - 1) * exp(-rho));")
 
-# ODE for C_i
-ode_functions.append("C_i' = rho * C_i * (1 - (C_u + C_i + " + " + ".join([f"C_i{j}" for j in range(1, n_hidden + 1)]) + " + C_l)/kappa) + psi * V * C_u - phi * C_i;")
-initial_conditions.append("C_i = 0;")
+# ODE for I_1
+ode_functions.append("I_1' = rho * I_1 * (1 - (U + " + " + ".join([f"I_{j}" for j in range(1, L+1)]) + ")/kappa) + psi * V * U - phi * I_1;")
+initial_conditions.append("I_1 = 0;")
 
-# ODE and initial conditions for C_i1 to C_i{n_hidden}
-for j in range(1, n_hidden + 1):
-  if j == 1:
-    ode_functions.append(f"C_i{j}' = rho * C_i{j} * (1 - (C_u + C_i + " + " + ".join([f"C_i{k}" for k in range(1, n_hidden + 1)]) + f" + C_l)/kappa) + phi * C_i - phi * C_i{j};")
-  else:
-    ode_functions.append(f"C_i{j}' = rho * C_i{j} * (1 - (C_u + C_i + " + " + ".join([f"C_i{k}" for k in range(1, n_hidden + 1)]) + f" + C_l)/kappa) + phi * C_i{j-1} - phi * C_i{j};")
-  initial_conditions.append(f"C_i{j} = 0;")
+# ODE and initial conditions for I_2 to I_{L-1}
+for j in range(2, L):
+  ode_functions.append(f"I_{j}' = rho * I_{j} * (1 - (U + " + " + ".join([f"I_{k}" for k in range(1, L+1)]) + f")/kappa) + phi * I_{j-1} - phi * I_{j};")
+  initial_conditions.append(f"I_{j} = 0;")
 
-# ODE for C_l
-ode_functions.append(f"C_l' = rho * C_l * (1 - (C_u + C_i + " + " + ".join([f"C_i{j}" for j in range(1, n_hidden + 1)]) + f" + C_l)/kappa) + phi * C_i{n_hidden} - alpha * C_l;")
-initial_conditions.append("C_l = 0;")
+# ODE for I_L
+ode_functions.append(f"I_{L}' = rho * I_{L} * (1 - (U + " + " + ".join([f"I_{j}" for j in range(1, L+1)]) + f")/kappa) + phi * I_{L-1} - alpha * I_{L};")
+initial_conditions.append(f"I_{L} = 0;")
 
 # ODE for V
-ode_functions.append("V' = beta * alpha * C_l - psi * V * C_u - delta * V;")
-initial_conditions.append("V = virus_injection;")
+ode_functions.append(f"V' = beta * alpha * I_{L} - psi * V * U - delta * V;")
+initial_conditions.append("V = u_2;")
 
-dividing_infected_cells_model = f"""
-model dividing_infected_cells
+age_of_infection_model = f"""
+model age_of_infection_model
 
   // ODE functions
   {' '.join(ode_functions)}
@@ -49,7 +38,7 @@ model dividing_infected_cells
   {' '.join(initial_conditions)}
 
   // condition dependent parameters
-  virus_injection = 1 * 1E9; // pfu
+  u_2 = 1 * 1E9; // pfu
   
   // parameters to be estimated
   rho = 0.01;
@@ -59,24 +48,13 @@ model dividing_infected_cells
   alpha = 0.01;
   beta = 0.01;
   delta = 0.01;
-  // the scaling parameter should handle the scaling from cell number to volume of tumor
 
-  // it seems like lambda is reserved and hence cannot be used as a parameter name
-
-  // Event to set C_u to zero when C_u falls below 1e-8
-  at (C_u < 1e-2): C_u = 0;
+  // Event to set U to zero when U falls below 1e-8, to avoid exploding solutions that are not biologically relevant
+  at (U < 1e-8): U = 0;
 end
 """
 
 # Load the model
-r = te.loada(dividing_infected_cells_model)
-
-# convert model back to Antimony / SBML
-ant_str_before = r.getAntimony()
-sbml_str_before = r.getSBML()
-
-# write xml file
-# with open('petab_files/dividing_infected_cells_v3.xml', 'w') as f:
-#     f.write(sbml_str_before)
-
-r.exportToSBML('petab_files/dividing_infected_cells_event_n=10.xml', current=False)
+r = te.loada(age_of_infection_model)
+# Export the model to SBML
+r.exportToSBML('petab_files/age_of_infection_model.xml', current=False)
