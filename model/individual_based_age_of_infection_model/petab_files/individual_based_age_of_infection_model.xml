@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">
-  <model metaid="dividing_infected_cells" id="dividing_infected_cells">
+  <model metaid="individual_based_age_of_infection_model" id="individual_based_age_of_infection_model">
     <listOfParameters>
-      <parameter id="C_u" constant="false"/>
+      <parameter id="U" constant="false"/>
       <parameter id="rho" value="0.01" constant="true"/>
-      <parameter id="C_i" value="0" constant="false"/>
-      <parameter id="C_i1" value="0" constant="false"/>
-      <parameter id="C_i2" value="0" constant="false"/>
-      <parameter id="C_i3" value="0" constant="false"/>
-      <parameter id="C_i4" value="0" constant="false"/>
-      <parameter id="C_i5" value="0" constant="false"/>
-      <parameter id="C_l" value="0" constant="false"/>
+      <parameter id="I_1" value="0" constant="false"/>
+      <parameter id="I_2" value="0" constant="false"/>
+      <parameter id="I_3" value="0" constant="false"/>
+      <parameter id="I_4" value="0" constant="false"/>
+      <parameter id="I_5" value="0" constant="false"/>
       <parameter id="kappa" value="0.01" constant="true"/>
       <parameter id="psi" value="0.01" constant="true"/>
       <parameter id="V" constant="false"/>
@@ -18,46 +16,38 @@
       <parameter id="alpha" value="0.01" constant="true"/>
       <parameter id="beta" value="0.01" constant="true"/>
       <parameter id="delta" value="0.01" constant="true"/>
-      <parameter id="ini_theta" value="1" constant="true"/>
-      <parameter id="virus_injection" constant="true"/>
+      <parameter id="xi_i_k" value="1" constant="true"/>
+      <parameter id="u_2" constant="true"/>
     </listOfParameters>
     <listOfInitialAssignments>
-      <initialAssignment symbol="C_u">
+      <initialAssignment symbol="U">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <divide/>
-            <cn type="integer"> 1 </cn>
+            <ci> kappa </ci>
             <apply>
               <plus/>
-              <apply>
-                <divide/>
-                <cn type="integer"> 1 </cn>
-                <ci> kappa </ci>
-              </apply>
+              <cn type="integer"> 1 </cn>
               <apply>
                 <times/>
+                <apply>
+                  <minus/>
+                  <apply>
+                    <divide/>
+                    <ci> kappa </ci>
+                    <apply>
+                      <times/>
+                      <cn type="integer"> 400 </cn>
+                      <ci> xi_i_k </ci>
+                    </apply>
+                  </apply>
+                  <cn type="integer"> 1 </cn>
+                </apply>
                 <apply>
                   <exp/>
                   <apply>
                     <minus/>
                     <ci> rho </ci>
-                  </apply>
-                </apply>
-                <apply>
-                  <minus/>
-                  <apply>
-                    <divide/>
-                    <cn type="integer"> 1 </cn>
-                    <apply>
-                      <times/>
-                      <cn type="integer"> 400 </cn>
-                      <ci> ini_theta </ci>
-                    </apply>
-                  </apply>
-                  <apply>
-                    <divide/>
-                    <cn type="integer"> 1 </cn>
-                    <ci> kappa </ci>
                   </apply>
                 </apply>
               </apply>
@@ -67,10 +57,10 @@
       </initialAssignment>
       <initialAssignment symbol="V">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <ci> virus_injection </ci>
+          <ci> u_2 </ci>
         </math>
       </initialAssignment>
-      <initialAssignment symbol="virus_injection">
+      <initialAssignment symbol="u_2">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <times/>
@@ -81,14 +71,14 @@
       </initialAssignment>
     </listOfInitialAssignments>
     <listOfRules>
-      <rateRule variable="C_u">
+      <rateRule variable="U">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <minus/>
             <apply>
               <times/>
               <ci> rho </ci>
-              <ci> C_u </ci>
+              <ci> U </ci>
               <apply>
                 <minus/>
                 <cn type="integer"> 1 </cn>
@@ -96,14 +86,12 @@
                   <divide/>
                   <apply>
                     <plus/>
-                    <ci> C_u </ci>
-                    <ci> C_i </ci>
-                    <ci> C_i1 </ci>
-                    <ci> C_i2 </ci>
-                    <ci> C_i3 </ci>
-                    <ci> C_i4 </ci>
-                    <ci> C_i5 </ci>
-                    <ci> C_l </ci>
+                    <ci> U </ci>
+                    <ci> I_1 </ci>
+                    <ci> I_2 </ci>
+                    <ci> I_3 </ci>
+                    <ci> I_4 </ci>
+                    <ci> I_5 </ci>
                   </apply>
                   <ci> kappa </ci>
                 </apply>
@@ -113,12 +101,12 @@
               <times/>
               <ci> psi </ci>
               <ci> V </ci>
-              <ci> C_u </ci>
+              <ci> U </ci>
             </apply>
           </apply>
         </math>
       </rateRule>
-      <rateRule variable="C_i">
+      <rateRule variable="I_1">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <minus/>
@@ -127,7 +115,7 @@
               <apply>
                 <times/>
                 <ci> rho </ci>
-                <ci> C_i </ci>
+                <ci> I_1 </ci>
                 <apply>
                   <minus/>
                   <cn type="integer"> 1 </cn>
@@ -135,14 +123,12 @@
                     <divide/>
                     <apply>
                       <plus/>
-                      <ci> C_u </ci>
-                      <ci> C_i </ci>
-                      <ci> C_i1 </ci>
-                      <ci> C_i2 </ci>
-                      <ci> C_i3 </ci>
-                      <ci> C_i4 </ci>
-                      <ci> C_i5 </ci>
-                      <ci> C_l </ci>
+                      <ci> U </ci>
+                      <ci> I_1 </ci>
+                      <ci> I_2 </ci>
+                      <ci> I_3 </ci>
+                      <ci> I_4 </ci>
+                      <ci> I_5 </ci>
                     </apply>
                     <ci> kappa </ci>
                   </apply>
@@ -152,18 +138,18 @@
                 <times/>
                 <ci> psi </ci>
                 <ci> V </ci>
-                <ci> C_u </ci>
+                <ci> U </ci>
               </apply>
             </apply>
             <apply>
               <times/>
               <ci> phi </ci>
-              <ci> C_i </ci>
+              <ci> I_1 </ci>
             </apply>
           </apply>
         </math>
       </rateRule>
-      <rateRule variable="C_i1">
+      <rateRule variable="I_2">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <minus/>
@@ -172,7 +158,7 @@
               <apply>
                 <times/>
                 <ci> rho </ci>
-                <ci> C_i1 </ci>
+                <ci> I_2 </ci>
                 <apply>
                   <minus/>
                   <cn type="integer"> 1 </cn>
@@ -180,14 +166,12 @@
                     <divide/>
                     <apply>
                       <plus/>
-                      <ci> C_u </ci>
-                      <ci> C_i </ci>
-                      <ci> C_i1 </ci>
-                      <ci> C_i2 </ci>
-                      <ci> C_i3 </ci>
-                      <ci> C_i4 </ci>
-                      <ci> C_i5 </ci>
-                      <ci> C_l </ci>
+                      <ci> U </ci>
+                      <ci> I_1 </ci>
+                      <ci> I_2 </ci>
+                      <ci> I_3 </ci>
+                      <ci> I_4 </ci>
+                      <ci> I_5 </ci>
                     </apply>
                     <ci> kappa </ci>
                   </apply>
@@ -196,18 +180,18 @@
               <apply>
                 <times/>
                 <ci> phi </ci>
-                <ci> C_i </ci>
+                <ci> I_1 </ci>
               </apply>
             </apply>
             <apply>
               <times/>
               <ci> phi </ci>
-              <ci> C_i1 </ci>
+              <ci> I_2 </ci>
             </apply>
           </apply>
         </math>
       </rateRule>
-      <rateRule variable="C_i2">
+      <rateRule variable="I_3">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <minus/>
@@ -216,7 +200,7 @@
               <apply>
                 <times/>
                 <ci> rho </ci>
-                <ci> C_i2 </ci>
+                <ci> I_3 </ci>
                 <apply>
                   <minus/>
                   <cn type="integer"> 1 </cn>
@@ -224,14 +208,12 @@
                     <divide/>
                     <apply>
                       <plus/>
-                      <ci> C_u </ci>
-                      <ci> C_i </ci>
-                      <ci> C_i1 </ci>
-                      <ci> C_i2 </ci>
-                      <ci> C_i3 </ci>
-                      <ci> C_i4 </ci>
-                      <ci> C_i5 </ci>
-                      <ci> C_l </ci>
+                      <ci> U </ci>
+                      <ci> I_1 </ci>
+                      <ci> I_2 </ci>
+                      <ci> I_3 </ci>
+                      <ci> I_4 </ci>
+                      <ci> I_5 </ci>
                     </apply>
                     <ci> kappa </ci>
                   </apply>
@@ -240,18 +222,18 @@
               <apply>
                 <times/>
                 <ci> phi </ci>
-                <ci> C_i1 </ci>
+                <ci> I_2 </ci>
               </apply>
             </apply>
             <apply>
               <times/>
               <ci> phi </ci>
-              <ci> C_i2 </ci>
+              <ci> I_3 </ci>
             </apply>
           </apply>
         </math>
       </rateRule>
-      <rateRule variable="C_i3">
+      <rateRule variable="I_4">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <minus/>
@@ -260,7 +242,7 @@
               <apply>
                 <times/>
                 <ci> rho </ci>
-                <ci> C_i3 </ci>
+                <ci> I_4 </ci>
                 <apply>
                   <minus/>
                   <cn type="integer"> 1 </cn>
@@ -268,14 +250,12 @@
                     <divide/>
                     <apply>
                       <plus/>
-                      <ci> C_u </ci>
-                      <ci> C_i </ci>
-                      <ci> C_i1 </ci>
-                      <ci> C_i2 </ci>
-                      <ci> C_i3 </ci>
-                      <ci> C_i4 </ci>
-                      <ci> C_i5 </ci>
-                      <ci> C_l </ci>
+                      <ci> U </ci>
+                      <ci> I_1 </ci>
+                      <ci> I_2 </ci>
+                      <ci> I_3 </ci>
+                      <ci> I_4 </ci>
+                      <ci> I_5 </ci>
                     </apply>
                     <ci> kappa </ci>
                   </apply>
@@ -284,18 +264,18 @@
               <apply>
                 <times/>
                 <ci> phi </ci>
-                <ci> C_i2 </ci>
+                <ci> I_3 </ci>
               </apply>
             </apply>
             <apply>
               <times/>
               <ci> phi </ci>
-              <ci> C_i3 </ci>
+              <ci> I_4 </ci>
             </apply>
           </apply>
         </math>
       </rateRule>
-      <rateRule variable="C_i4">
+      <rateRule variable="I_5">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <apply>
             <minus/>
@@ -304,7 +284,7 @@
               <apply>
                 <times/>
                 <ci> rho </ci>
-                <ci> C_i4 </ci>
+                <ci> I_5 </ci>
                 <apply>
                   <minus/>
                   <cn type="integer"> 1 </cn>
@@ -312,14 +292,12 @@
                     <divide/>
                     <apply>
                       <plus/>
-                      <ci> C_u </ci>
-                      <ci> C_i </ci>
-                      <ci> C_i1 </ci>
-                      <ci> C_i2 </ci>
-                      <ci> C_i3 </ci>
-                      <ci> C_i4 </ci>
-                      <ci> C_i5 </ci>
-                      <ci> C_l </ci>
+                      <ci> U </ci>
+                      <ci> I_1 </ci>
+                      <ci> I_2 </ci>
+                      <ci> I_3 </ci>
+                      <ci> I_4 </ci>
+                      <ci> I_5 </ci>
                     </apply>
                     <ci> kappa </ci>
                   </apply>
@@ -328,101 +306,13 @@
               <apply>
                 <times/>
                 <ci> phi </ci>
-                <ci> C_i3 </ci>
-              </apply>
-            </apply>
-            <apply>
-              <times/>
-              <ci> phi </ci>
-              <ci> C_i4 </ci>
-            </apply>
-          </apply>
-        </math>
-      </rateRule>
-      <rateRule variable="C_i5">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <minus/>
-            <apply>
-              <plus/>
-              <apply>
-                <times/>
-                <ci> rho </ci>
-                <ci> C_i5 </ci>
-                <apply>
-                  <minus/>
-                  <cn type="integer"> 1 </cn>
-                  <apply>
-                    <divide/>
-                    <apply>
-                      <plus/>
-                      <ci> C_u </ci>
-                      <ci> C_i </ci>
-                      <ci> C_i1 </ci>
-                      <ci> C_i2 </ci>
-                      <ci> C_i3 </ci>
-                      <ci> C_i4 </ci>
-                      <ci> C_i5 </ci>
-                      <ci> C_l </ci>
-                    </apply>
-                    <ci> kappa </ci>
-                  </apply>
-                </apply>
-              </apply>
-              <apply>
-                <times/>
-                <ci> phi </ci>
-                <ci> C_i4 </ci>
-              </apply>
-            </apply>
-            <apply>
-              <times/>
-              <ci> phi </ci>
-              <ci> C_i5 </ci>
-            </apply>
-          </apply>
-        </math>
-      </rateRule>
-      <rateRule variable="C_l">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <apply>
-            <minus/>
-            <apply>
-              <plus/>
-              <apply>
-                <times/>
-                <ci> rho </ci>
-                <ci> C_l </ci>
-                <apply>
-                  <minus/>
-                  <cn type="integer"> 1 </cn>
-                  <apply>
-                    <divide/>
-                    <apply>
-                      <plus/>
-                      <ci> C_u </ci>
-                      <ci> C_i </ci>
-                      <ci> C_i1 </ci>
-                      <ci> C_i2 </ci>
-                      <ci> C_i3 </ci>
-                      <ci> C_i4 </ci>
-                      <ci> C_i5 </ci>
-                      <ci> C_l </ci>
-                    </apply>
-                    <ci> kappa </ci>
-                  </apply>
-                </apply>
-              </apply>
-              <apply>
-                <times/>
-                <ci> phi </ci>
-                <ci> C_i5 </ci>
+                <ci> I_4 </ci>
               </apply>
             </apply>
             <apply>
               <times/>
               <ci> alpha </ci>
-              <ci> C_l </ci>
+              <ci> I_5 </ci>
             </apply>
           </apply>
         </math>
@@ -437,13 +327,13 @@
                 <times/>
                 <ci> beta </ci>
                 <ci> alpha </ci>
-                <ci> C_l </ci>
+                <ci> I_5 </ci>
               </apply>
               <apply>
                 <times/>
                 <ci> psi </ci>
                 <ci> V </ci>
-                <ci> C_u </ci>
+                <ci> U </ci>
               </apply>
             </apply>
             <apply>
@@ -461,13 +351,13 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <lt/>
-              <ci> C_u </ci>
-              <cn> 0.01 </cn>
+              <ci> U </ci>
+              <cn type="e-notation"> 1 <sep/> -8 </cn>
             </apply>
           </math>
         </trigger>
         <listOfEventAssignments>
-          <eventAssignment variable="C_u">
+          <eventAssignment variable="U">
             <math xmlns="http://www.w3.org/1998/Math/MathML">
               <cn type="integer"> 0 </cn>
             </math>
