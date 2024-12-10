@@ -40,12 +40,14 @@ $$\frac{\partial H}{\partial V} = -\psi U - \delta.$$
 ## Boundedness
 
 To ensure Lipschitz continuity, these partial derivatives must be bounded on the domain of interest. In biological models, $$U$$, $$I$$, and $$V$$ often represent populations or concentrations, which are typically non-negative and subject to an upper bound (e.g., carrying capacity $$\kappa$$).
-	•	Assume $$U + I \leq \kappa$$.
-	•	Assume $$U, I, V \geq 0$$.
-	•	If $$U, I, V$$ are each bounded by some finite value $$M$$, then all the above partial derivatives remain bounded.
+
+- Assume $$U + I \leq \kappa$$.
+- Assume $$U, I, V \geq 0$$.
+- If $$U, I, V$$ are each bounded by some finite value $$M$$, then all the above partial derivatives remain bounded.
 
 ## Conclusions
-	•	Local Lipschitz Continuity: On any bounded domain of $$\mathbb{R}^3$$, the functions $$F$$, $$G$$, and $$H$$ are Lipschitz continuous. This guarantees the existence and uniqueness of solutions to the ODE system according to the Picard–Lindelöf theorem.
-	•	Global Lipschitz Continuity: If $$U$$, $$I$$, or $$V$$ become unbounded, the partial derivatives may also become unbounded, losing global Lipschitz continuity. However, in practical biological scenarios, these variables remain bounded by physiological or environmental constraints, ensuring Lipschitz continuity within the relevant region.
+
+- Local Lipschitz Continuity: On any bounded domain of $$\mathbb{R}^3$$, the functions $$F$$, $$G$$, and $$H$$ are Lipschitz continuous. This guarantees the existence and uniqueness of solutions to the ODE system according to the Picard–Lindelöf theorem.
+- Global Lipschitz Continuity: If $$U$$, $$I$$, or $$V$$ become unbounded, the partial derivatives may also become unbounded, losing global Lipschitz continuity. However, in practical biological scenarios, these variables remain bounded by physiological or environmental constraints, ensuring Lipschitz continuity within the relevant region.
 
 In summary, under reasonable assumptions about the boundedness of the variables, the given ODEs are Lipschitz continuous with respect to $$[U]$$, $$[I]$$, and $$[V]$$.
