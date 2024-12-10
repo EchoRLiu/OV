@@ -1,7 +1,7 @@
 # Parameter Estimation and Model Selection for the Quantitative Analysis of Oncolytic Virus Therapy in Zebrafish Embryos
 
 <p align="center">
-  <img src="figure/illustration/ov_mechanism.png" alt="Oncolytic Virus (vvDD) Mechanism" width="300">
+  <img src="figure/illustration/vvDD_mechanism.pdf" alt="Oncolytic Virus (vvDD) Mechanism" width="300">
 </p>
 
 ## Overview
@@ -36,6 +36,7 @@ cd individual_based_age_of_infection_model
 
 in each model folder, there are files:
 
+- `README.me`: includes proof of the ODEs being Lipschitz continuous
 - `model_creation.py`: create the `.xml` model file
 - `petab_files_creation.ipynb`: build petab files defining the optimization problem
 - `model_optimization.py`: perform optimization 
