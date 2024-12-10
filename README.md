@@ -1,7 +1,7 @@
 # Parameter Estimation and Model Selection for the Quantitative Analysis of Oncolytic Virus Therapy in Zebrafish Embryos
 
 <p align="center">
-  <img src="figure/illustration/vvDD_mechanism.pdf" alt="Oncolytic Virus (vvDD) Mechanism" width="300">
+  <img src="figure/illustration/vvDD_mechanism.png" alt="Oncolytic Virus (vvDD) Mechanism" width="300">
 </p>
 
 ## Overview
