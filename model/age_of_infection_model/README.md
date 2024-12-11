@@ -1,4 +1,4 @@
-For age-of-infection model with scaling parameter:
+## For age-of-infection model with scaling parameter:
 
 ```
 ------------------------ 
@@ -24,7 +24,7 @@ For age-of-infection model with scaling parameter:
  Total execution time: 6.045823e+01 seconds. 
  ```
 
- For age-of-infection model without scaling parameter:
+## For age-of-infection model without scaling parameter:
 
  ```
 ------------------------ 

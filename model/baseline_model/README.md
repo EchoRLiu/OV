@@ -1,4 +1,4 @@
-For baseline model with the sclaing parameter:
+## For baseline model with the sclaing parameter:
 
 ```
  ------------------------ 
@@ -22,7 +22,7 @@ For baseline model with the sclaing parameter:
  Total execution time: 7.959864e+00 seconds. 
 ```
 
-For baseline model without the scaling parameter:
+## For baseline model without the scaling parameter:
 
 ```
 ------------------------ 

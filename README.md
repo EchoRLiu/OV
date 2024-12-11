@@ -13,11 +13,10 @@ This repository contains the code and supplementary accompanying the paper, *Par
     - model fits
     - profile plots
     - waterfall plot combined with parameter plots
-- **model/**: contains the following three models listed in the paper:
+- **model/**: contains the proof of Lipschitz continuity for all models and the following three models listed in the paper:
     - baseline model
     - age-of-infection model
     - individual-based age-of-infection model
-    - proof of Lipschitz continuity for all models
 
 in each model folder, there are files:
 
