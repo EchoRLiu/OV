@@ -31,12 +31,12 @@ cd individual_based_age_of_infection_model
 - **figure/**: contains figure output from `visualization.ipynb` for each model, e.g. model fits
 - **model/**: contains the following three models listed in the paper:
     - baseline model
-    - age of infection model
-    - individual-based age of infection model
+    - age-of-infection model
+    - individual-based age-of-infection model
+    - proof of Lipschitz continuity for all models
 
 in each model folder, there are files:
 
-- `README.me`: includes proof of the ODEs being Lipschitz continuous
 - `model_creation.py`: create the `.xml` model file
 - `petab_files_creation.ipynb`: build petab files defining the optimization problem
 - `model_optimization.py`: perform optimization 
