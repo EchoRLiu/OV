@@ -27,6 +27,37 @@ in each model folder, there are files:
 - `visualization.ipynb`: visualize the optimization results
 - `check_gradients.ipynb`: double check the gradients of the model
 
+## Requirement
+
+After installing all the code using `git clone https://github.com/EchoRLiu/OV.git`, run the following command in the project folder to creat a virtual environment and install all the necessary packages
+
+```
+python -m venv env
+
+source env/bin/activate
+
+pip install -v -r requirements.txt
+
+```
+## Tutorial
+
+**Quickstart**
+
+To try one of the models,
+
+1) first go to the model folder, e.g. individual_based_age_of_infection_model, and perform model optimization and save the printouts (if there is no `optimization_history` folder, please create one first to store all the results):
+
+```
+cd model/individual_based_age_of_infection_model
+
+python model_optimization.py > optimization_history/result.out 2>&1
+
+```
+
+2) run through `visualization.ipynb` to visualize the results
+
+3) (optional) run through the `check_gradients.ipynb` to check the gradients
+
 ## Contact
 If you have any questions, please feel free to contact any of the authors:
 - Yuhong Liu (yuhong.liu@uni-bonn.de)
